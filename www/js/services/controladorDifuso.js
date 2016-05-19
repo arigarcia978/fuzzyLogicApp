@@ -2,12 +2,14 @@ function ControladorDifuso(){
 
 }
 
-ControladorDifuso.prototype.seleccionarPromociones = function(nuevaUbicacion, lugaresCercanos){
-	var entradasDeMotorDeInferencia = prepararEntradas(ubicacion, lugaresCercanos);
-
-	var entradasFusificadas = fusificar(entradasDeMotorDeInferencia);
+ControladorDifuso.prototype.seleccionarPromociones = function(entradas){
+	var entradasFusificadas = fusificar(entradas);
 	
-	setBaseDeHechosNítida();
-	setBaseDeHechosDifusa(entradasFusificadas);
-	inferir();
+	var sistemaExperto = new SistemaExperto();
+	sistemaExperto.ejecutar();
+	sistemaExperto.agregarReglas();
+	sistemaExperto.setBaseDeHechosNítida();
+	sistemaExperto.setBaseDeHechosDifusa(entradasFusificadas);
+	sistemaExperto.inferir();
+
 }
