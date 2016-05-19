@@ -44,6 +44,7 @@ angular.module('starter.services', [])
           return chats[i];
         }
       }
+
       return null;
     }
   };
