@@ -1,3 +1,6 @@
+var fuzzylogic= require("fuzzylogic");
+var $ = require('jquery-browserify');
+
 function Difusor(){}
 
 Difusor.prototype.fusificar = function(entradas){
@@ -20,7 +23,9 @@ var fusificarVisitasMensuales = function(visitas){
 	var muyFrecuente = fuzzylogic.trapezoid(visitas, 5, 7, 100);
 
 	console.log('visitas: '+visitas);
-	console.log('visitas: '+visitas);
-	console.log('visitas: '+visitas);
-	console.log('visitas: '+visitas);
+	console.log('pocoFrecuente: '+pocoFrecuente);
+	console.log('frecuente: '+frecuente);
+	console.log('muyFrecuente: '+muyFrecuente);
 }
+
+fusificarVisitasMensuales(20);
