@@ -1,60 +1,77 @@
 angular.module('starter')
-	.controller('LocationController', ['googleMaps', '$rootScope', 'fuzzyControllerService', 
-		function(googleMaps, $rootScope, fuzzyControllerService){
-		  var lugarActual;
+	.controller('LocationController', ['googleMaps', '$rootScope', 'fuzzyControllerService', 'userService',
+		function(googleMaps, $rootScope, fuzzyControllerService, userService){
+			var lugarActual;
 
-		  $rootScope.actualizarUbicacion = function(latitud,longitud){//o ubicacion
-		  	var nuevaUbicacion = new Ubicacion(latitud, longitud);
-		    var ubicacionAnterior = googleMaps.getUltimaUbicacion();
-		  	var lugaresCercanos;
-		  	var motorMatematico = new MotorMatematico();
-			
-			var seMovió = compararUbicaciones(ubicacionAnterior, nuevaUbicacion);
+			$rootScope.$on('actualizarUbicacion', function(ubicacion){//o ubicacion
+				console.log( "bai");
+				var ubicacionAnterior = googleMaps.getUltimaUbicacion();
+				var lugaresCercanos;										//Array de lugar (Del dominio)
+				var motorMatematico = new MotorMatematico();
 
-			//arreglar?
-		    if(seMovió) {
-		    	lugarActual = googleMaps.getLugarActual(nuevaUbicacion);
-		    	lugaresCercanos = googleMaps.buscarLugaresCercanos(nuevaUbicacion);
-				var entradas = prepararEntradas(nuevaUbicacion, lugaresCercanos);
+				var seMovió = compararUbicaciones(ubicacionAnterior, nuevaUbicacion);
 
-		      	fuzzyControllerService.getPromocionesAOfrecer(entradas);
-		      	actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion);
-		    } else {
-		    	comprobarSiEsVisita();
-		    }
-		  }
+				//arreglar?
+				if(seMovió) {
+					lugarActual = googleMaps.getLugarActual(nuevaUbicacion);
+					lugaresCercanos = googleMaps.buscarLugaresCercanos(nuevaUbicacion);
+					var entradas = prepararEntradas(nuevaUbicacion, lugaresCercanos);
 
-		  function compararUbicaciones(ubicacionAnterior, nuevaUbicacion){
-		  	var distancia = motorMatematico.calcularDistancia(ubicacionAnterior, nuevaUbicacion);
+					fuzzyControllerService.getPromocionesAOfrecer(entradas);
+					actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion);
+				} else {
+					comprobarSiEsVisita();
+				}
+			});
 
-		  	if(distancia == 0){
-		  		return false;
-		  	} else return true;
-		  }
+			function compararUbicaciones(ubicacionAnterior, nuevaUbicacion){
+				var distancia = motorMatematico.calcularDistancia(ubicacionAnterior, nuevaUbicacion);
 
-		  function comprobarSiEsVisita(ubicacionAnterior, nuevaUbicacion){
-		  	var direncia = motorMatematico.calcularDiferenciaDeTiempoEnMinutos();
-		  	if(diferencia > 20){
-		  		//incrementar en 1 las visitas al lugar al actual
-		  	}
-		  }
+				if(distancia == 0){
+				return false;
+				} else return true;
+			}
 
-		  function actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion){
-		  	//mandarle al googleMaps que haga ubicacionAnterior = nuevaUbicacion?
-		  }
+			function comprobarSiEsVisita(ubicacionAnterior, nuevaUbicacion){
+				var direncia = motorMatematico.calcularDiferenciaDeTiempoEnMinutos();
+				if(diferencia > 20){
+				//incrementar en 1 las visitas al lugar al actual
+				}
+			}
 
-		  function prepararEntradas(ubicacion, lugaresCercanos){
-			calcularVelocidadDeMovimiento(ubicacion);
-			calcularDistanciasALugaresCercanos(ubicacion, lugaresCercanos);
-			calcularVisitasMensualesALugares(lugaresCercanos);
+			function actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion){
+				//mandarle al googleMaps que haga ubicacionAnterior = nuevaUbicacion?
+			}
 
-			return entradas;
-		  };
+			function prepararEntradas(ubicacion, lugaresCercanos){
+				var entradas = {};
 
-		  function calcularVelocidadDeMovimiento() {}
+				agregarDistanciasALugaresCercanos(ubicacion, lugaresCercanos); 
+				agregarVisitasMensualesALugares(lugaresCercanos); 
 
-		  function calcularVisitasMensualesALugares(lugaresCercanos){}
+				entradas.lugares = lugaresCercanos;
+				entradas.velocidadDeMovimiento = calcularVelocidadDeMovimiento(ubicacion); // Es una sola variable
 
-		  function calcularDistanciasALugaresCercanos(ubicacion, lugaresCercanos){}
-		}
+				return entradas;
+			};
+
+			function agregarDistanciasALugaresCercanos(ubicacion, lugaresCercanos) {
+				//Trabajando con el objeto lugar del dominio
+				for (lugar in lugaresCercanos) {
+					lugar.setDistancia(calcularDistanciaAlLugarCercano(ubicacion, lugar.ubicacion));
+				}
+			}
+
+			function agregarVisitasMensualesALugares() {
+				for (lugar in lugaresCercanos) {
+					lugar.setCantidadDeVisitasMensuales(calcularVisitasMensualesAlLugar(lugar.nombre));
+				}
+			}
+
+			function calcularVisitasMensualesAlLugar(lugaresCercanos){}
+
+			function calcularDistanciaAlLugarCercano(ubicacion, ubicacionLugar){}
+
+			function calcularVelocidadDeMovimiento(ubicacion) {			}
+			}
 	]);
