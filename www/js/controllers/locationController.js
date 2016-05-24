@@ -2,12 +2,12 @@ angular.module('starter')
 	.controller('LocationController', ['googleMaps', '$rootScope', 'fuzzyControllerService', 'userService',
 		function(googleMaps, $rootScope, fuzzyControllerService, userService){
 			var lugarActual;
+			var motorMatematico = new MotorMatematico();
 
-			$rootScope.$on('actualizarUbicacion', function(ubicacion){//o ubicacion
+			$rootScope.$on('actualizarUbicacion', function(nuevaUbicacion){//o ubicacion
 				console.log( "bai");
-				var ubicacionAnterior = googleMaps.getUltimaUbicacion();
+				var ubicacionAnterior = userService.getUltimaUbicacion();
 				var lugaresCercanos;										//Array de lugar (Del dominio)
-				var motorMatematico = new MotorMatematico();
 
 				var seMovió = compararUbicaciones(ubicacionAnterior, nuevaUbicacion);
 
@@ -62,7 +62,7 @@ angular.module('starter')
 				}
 			}
 
-			function agregarVisitasMensualesALugares() {
+			function agregarVisitasMensualesALugares(lugaresCercanos) {
 				for (lugar in lugaresCercanos) {
 					lugar.setCantidadDeVisitasMensuales(calcularVisitasMensualesAlLugar(lugar.nombre));
 				}
@@ -70,8 +70,11 @@ angular.module('starter')
 
 			function calcularVisitasMensualesAlLugar(lugaresCercanos){}
 
-			function calcularDistanciaAlLugarCercano(ubicacion, ubicacionLugar){}
-
-			function calcularVelocidadDeMovimiento(ubicacion) {			}
+			function calcularDistanciaAlLugarCercano(ubicacion, ubicacionLugar){
+				return 0;
 			}
-	]);
+
+			function calcularVelocidadDeMovimiento(ubicacion) {			
+				return 10;
+			}
+		}]);

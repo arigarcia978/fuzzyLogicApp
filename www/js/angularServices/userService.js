@@ -4,7 +4,7 @@ angular.module('starter')
 	  	return {
 	    	getUltimaUbicacion: function() {
 	    		console.log(ubicacionAnterior);
-	      		return getLugaresCercanos(ubicacion);
+	      		return ubicacionAnterior;
 	    	}
 	  	}
 	}]);

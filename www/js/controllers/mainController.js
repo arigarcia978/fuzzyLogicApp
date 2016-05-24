@@ -8,6 +8,5 @@ angular.module('starter')
 			var ubicacion = new Ubicacion(44.40338, 2.17403, new Date(2016, 5, 24, 16, 25, 0, 0));
 			//var ubicacion = googleMaps.getUbicacion(); //del gps o googlemaps
 			$rootScope.$emit("actualizarUbicacion", ubicacion);
-			//actualizarUbicacion(ubicacion); //actualizarubicacion recibe latitud y longitud
 		}
 	}]);
