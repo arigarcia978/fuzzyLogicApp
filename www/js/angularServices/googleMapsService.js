@@ -1,5 +1,6 @@
 angular.module('starter')
 	.factory('googleMaps', [function(){
+	  var gooleMapsService = new GoogleMapsService()
 	  return {
 	    buscarLugaresCercanos: function(ubicacion) {
 	      //return getLugaresCercanos(ubicacion);
@@ -9,7 +10,7 @@ angular.module('starter')
 	    	return ;
 	    },
 	    getUbicacionActual: function(){
-	    	return ;
+	    	return  gooleMapsService.getUbicacion();
 	    }
 	  }
 	}]);
