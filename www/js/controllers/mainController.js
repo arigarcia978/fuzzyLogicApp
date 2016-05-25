@@ -4,10 +4,12 @@ angular.module('starter')
 		setInterval(getUbicacion, 5000);
 
 		function getUbicacion(){
-			var ubicacion = new Ubicacion(44.40338, 2.17403, new Date(2016, 5, 24, 16, 25, 0, 0));
+			var ubicacion = new Ubicacion(41.50338, 2.17403, new Date(2016, 5, 24, 16, 40, 0, 0));
+			console.log(ubicacion);
 			//$scope.ubicacion = new Ubicacion();
+			googleMaps.setUbicacionActual(ubicacion);
 			$scope.ubicacion = googleMaps.getUbicacionActual(); //del gps o googlemaps
-			$rootScope.$emit("actualizarUbicacion", ubicacion);
+			$rootScope.$emit("actualizarUbicacion");
 		}
 
 	}]);

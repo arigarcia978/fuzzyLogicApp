@@ -2,19 +2,22 @@ angular.module('starter')
 	.controller('LocationController', ['googleMaps', '$rootScope', 'fuzzyControllerService', 'userService',
 		function(googleMaps, $rootScope, fuzzyControllerService, userService){
 			var lugarActual;
+			var ubicacionAnterior;
 			var motorMatematico = new MotorMatematico();
 
-			$rootScope.$on('actualizarUbicacion', function(nuevaUbicacion){//o ubicacion
+			$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
 				console.log( "bai");
-				var ubicacionAnterior = userService.getUltimaUbicacion();
+				ubicacionAnterior = userService.getUltimaUbicacion();
+				console.log(ubicacionAnterior);
+				var nuevaUbicacion = googleMaps.getUbicacionActual();
 				console.log(nuevaUbicacion);
-				console.log(ubicacionAnterior.getLatitud());
 				var lugaresCercanos;										//Array de lugar (Del dominio)
 
 				var seMovió = compararUbicaciones(ubicacionAnterior, nuevaUbicacion);
 
 				//arreglar?
 				if(seMovió) {
+					console.log('se movió');
 					lugarActual = googleMaps.getLugarActual(nuevaUbicacion);
 					lugaresCercanos = googleMaps.buscarLugaresCercanos(nuevaUbicacion);
 					var entradas = prepararEntradas(nuevaUbicacion, lugaresCercanos);
@@ -22,27 +25,32 @@ angular.module('starter')
 					fuzzyControllerService.getPromocionesAOfrecer(entradas);
 					actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion);
 				} else {
-					comprobarSiEsVisita();
+					console.log('no se movio');
+					comprobarSiEsVisita(ubicacionAnterior, nuevaUbicacion);
 				}
 			});
 
 			function compararUbicaciones(ubicacionAnterior, nuevaUbicacion){
 				var distancia = motorMatematico.calcularDistanciaEnKMEntreUbicaciones(ubicacionAnterior, nuevaUbicacion);
-
+				var distanciaEnMetros = motorMatematico.convertirKMaMetros(distancia);
+				console.log('distancia' + distanciaEnMetros);
 				if(distancia == 0){
 				return false;
 				} else return true;
 			}
 
 			function comprobarSiEsVisita(ubicacionAnterior, nuevaUbicacion){
-				var direncia = motorMatematico.calcularDiferenciaDeTiempoEnMinutos();
-				if(diferencia > 20){
+				var diferencia = motorMatematico.tiempoTranscurridoEnHoras(ubicacionAnterior.getMomento(), nuevaUbicacion.getMomento());
+				console.log(diferencia);
+
+				//diferencia en horas
+				if(diferencia > 0.25){
 				//incrementar en 1 las visitas al lugar al actual
 				}
 			}
 
 			function actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion){
-				//mandarle al googleMaps que haga ubicacionAnterior = nuevaUbicacion?
+				userService.actualizarUltimaUbicacion(nuevaUbicacion);
 			}
 
 			function prepararEntradas(ubicacion, lugaresCercanos){

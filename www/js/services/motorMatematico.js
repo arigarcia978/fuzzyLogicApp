@@ -5,6 +5,11 @@ MotorMatematico.prototype.calcularEdad = function(fecha) {
 	var edad = new Date(edadEnMilisegundos);
 	return Math.abs(edad.getUTCFullYear() - 1970);
 }
+MotorMatematico.prototype.tiempoTranscurridoEnHoras = function(date1, date2){
+	var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+	var horas = timeDiff / (1000*3600); 
+	return horas;
+}
 MotorMatematico.prototype.convertirKMaMetros = function(km) {
 	return km * 1000;
 }

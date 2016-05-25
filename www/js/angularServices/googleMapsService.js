@@ -10,9 +10,9 @@ angular.module('starter')
 	    getLugarActual: function(ubicacion){
 	    	return ;
 	    },
-	    getUbicacionActual: function(){
-	    	return gooleMapsService.getUbicacion();
-	    },
+	    //getUbicacionActual: function(){
+	    //	return gooleMapsService.getUbicacion();
+	    //},
 	    setUbicacionActual: function(ubicacion) {
 	    	ubicacionActual = ubicacion;
 	    },
