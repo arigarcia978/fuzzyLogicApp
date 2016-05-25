@@ -7,6 +7,8 @@ angular.module('starter')
 			$rootScope.$on('actualizarUbicacion', function(nuevaUbicacion){//o ubicacion
 				console.log( "bai");
 				var ubicacionAnterior = userService.getUltimaUbicacion();
+				console.log(nuevaUbicacion);
+				console.log(ubicacionAnterior.getLatitud());
 				var lugaresCercanos;										//Array de lugar (Del dominio)
 
 				var seMovió = compararUbicaciones(ubicacionAnterior, nuevaUbicacion);
@@ -25,7 +27,7 @@ angular.module('starter')
 			});
 
 			function compararUbicaciones(ubicacionAnterior, nuevaUbicacion){
-				var distancia = motorMatematico.calcularDistancia(ubicacionAnterior, nuevaUbicacion);
+				var distancia = motorMatematico.calcularDistanciaEnKMEntreUbicaciones(ubicacionAnterior, nuevaUbicacion);
 
 				if(distancia == 0){
 				return false;
