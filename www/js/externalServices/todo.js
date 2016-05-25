@@ -63,6 +63,8 @@ function MotorDeInferencias() {
 function MotorMatematico() {
 
 }
+
+/*
 MotorMatematico.prototype.calcularEdad = function(fecha) {
 	var edadEnMilisegundos = Date.now() - fecha.getTime();
 	var edad = new Date(edadEnMilisegundos);
@@ -165,7 +167,6 @@ Perfil.prototype.agregarBaseDeConocimiento = function(baseDeConocimiento) {
 Perfil.prototype.getMeGustanEnFB = function() {
 	return this.meGustanEnFB;
 }
-
 
 
 function AdaptadorFB() {
@@ -279,6 +280,7 @@ AdaptadorGoogleMaps.prototype.buscarTodosLosNegociosCercanos = function(ubicacio
 	return negociosCercanos;
 }
 
+
 function BaseDeDatosDeUsuarios() {
 	this.Usuarios = [
 		{id: "123", nombre: "Leandro", sexo: SEXO.MASCULINO, src:"", fechaN: '11/27/1992', visitasUltimoMes: {}, visitasSemanales: {}}, 
@@ -307,7 +309,7 @@ BaseDeDatosDeUsuarios.prototype.getUsuarioPorId = function(id) {
 		}
 	}
 }
-
+*/
 function AdaptadorAplicacion(id, ubicacion) {
 	this.BDUsuariosNuestraAplicacion = new BaseDeDatosDeUsuarios();
 	this.perfil = this.crearPerfil(this.getUsuario(id), ubicacion);

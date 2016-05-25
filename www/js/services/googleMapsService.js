@@ -1,3 +1,4 @@
+/*
 function GoogleMapsService(){}
 
 GoogleMapsService.prototype.getLugaresCercanos = function(ubicacion){}
@@ -11,3 +12,91 @@ GoogleMapsService.prototype.getUbicacion = function(){
                     return a;
                 })
 		}
+*/
+
+var NEGOCIOS = {
+	MCDONALD: 'McDonalds',
+	LA_PIZZADA: 'La Pizzada',
+	BURGER_KING: 'Burger King',
+	RECORCHOLIS: 'Recorcholis',
+	EL_ATENEO: 'El Ateneo',
+	EL_BALON: 'El Balón',
+	MIL99: 'Mil99',
+	ATLAS: 'Atlas',
+	LANCASTER: 'Lancaster',
+	VEA: 'Vea',
+	CARREFOUR: 'Carrefour'
+}
+
+function AdaptadorGoogleMaps() {
+	this.BDLugares = {};
+	this.BDLugares[NEGOCIOS.MCDONALD] = {
+		tipoLugar: 'Restaurante de Comida Rápida',
+		ubicacion: new Ubicacion("23.56347294", "54.12337982")
+	}
+	this.BDLugares[NEGOCIOS.LA_PIZZADA] = {
+		tipoLugar: 'Pizzería',
+		ubicacion: new Ubicacion("23.56417395", "54.12298572")
+	}
+	this.BDLugares[NEGOCIOS.BURGER_KING] = {
+		tipoLugar: 'Comida Rápida',
+		ubicacion: new Ubicacion("23.56353926", "54.12334275")
+	}
+	this.BDLugares[NEGOCIOS.RECORCHOLIS] = {
+		tipoLugar: 'Discoteca',
+		ubicacion: new Ubicacion("23.56589209", "54.12198742")
+	}
+	this.BDLugares[NEGOCIOS.EL_BALON] = {
+		tipoLugar: 'Bar restaurante',
+		ubicacion: new Ubicacion("23.56589209", "54.12198742")
+	}
+	this.BDLugares[NEGOCIOS.MIL99] = {
+		tipoLugar: 'Bar restaurante',
+		ubicacion: new Ubicacion("23.56589209", "54.12198742")
+	}
+	this.BDLugares[NEGOCIOS.VEA] = {
+		tipoLugar: 'Supermercado',
+		ubicacion: new Ubicacion("23.56589209", "54.12198742")
+	}
+	this.BDLugares[NEGOCIOS.LANCASTER] = {
+		tipoLugar: 'Club nocturno',
+		ubicacion: new Ubicacion("23.56589209", "54.12198742")
+	}
+	this.BDLugares[NEGOCIOS.CARREFOUR] = {
+		tipoLugar: 'Supermercado',
+		ubicacion: new Ubicacion("23.56589209", "54.12198742")
+	}
+	this.BDLugares[NEGOCIOS.ATLAS] = {
+		tipoLugar: 'Cine',
+		ubicacion: new Ubicacion("23.56589209", "54.12198742")
+	}
+}
+AdaptadorGoogleMaps.prototype.getTipoLugar = function(nombreLugar) {
+	return this.BDLugares[nombreLugar].tipoLugar;
+}
+AdaptadorGoogleMaps.prototype.buscarTodosLosNegociosCercanos = function(ubicacion) {
+	var medioLadoCuadradoDentroDeRadio150m = 0.001;
+	var medioLadoCuadradoDentroDeRadio400m = 0.0025;
+
+	var extremoLatitudMayor = parseFloat(ubicacion.getLatitud()) + medioLadoCuadradoDentroDeRadio150m;
+	var extremoLatitudMenor = ubicacion.getLatitud() - medioLadoCuadradoDentroDeRadio150m;
+	var extremoLongitudMayor = parseFloat(ubicacion.getLongitud()) + medioLadoCuadradoDentroDeRadio150m;
+	var extremoLongitudMenor = ubicacion.getLongitud() - medioLadoCuadradoDentroDeRadio150m;
+
+	var negociosCercanos = [];
+
+	for (lugar in this.BDLugares) {
+		var lt = this.BDLugares[lugar].ubicacion.getLatitud();
+		var ln = this.BDLugares[lugar].ubicacion.getLongitud();
+		var ltM = extremoLatitudMayor;
+		var ltm = extremoLatitudMenor;
+		var lnM = extremoLongitudMayor;
+		var lnm = extremoLongitudMenor;
+
+		if (lt <= ltM && lt >= ltm && ln <= lnM && ln >= lnm) {
+			//lugar cercano
+			negociosCercanos.push(lugar);
+		}
+	}
+	return negociosCercanos;
+}

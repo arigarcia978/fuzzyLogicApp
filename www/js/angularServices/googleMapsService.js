@@ -1,6 +1,6 @@
 angular.module('starter')
 	.factory('googleMaps', [function(){
-	  var gooleMapsService = new GoogleMapsService();
+	  var gooleMapsService = new AdaptadorGoogleMaps();
 	  var ubicacionActual;
 	  return {
 	    buscarLugaresCercanos: function(ubicacion) {
