@@ -6,11 +6,8 @@ angular.module('starter')
 			var motorMatematico = new MotorMatematico();
 
 			$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
-				console.log( "bai");
 				ubicacionAnterior = userService.getUltimaUbicacion();
-				console.log(ubicacionAnterior);
 				var nuevaUbicacion = googleMaps.getUbicacionActual();
-				console.log(nuevaUbicacion);
 				var lugaresCercanos;										//Array de lugar (Del dominio)
 
 				var seMovió = compararUbicaciones(ubicacionAnterior, nuevaUbicacion);
@@ -56,14 +53,27 @@ angular.module('starter')
 			function prepararEntradas(ubicacion, lugaresCercanos){
 				var entradas = {};
 
+				entradas.nitidas = prepararEntradasNitidas();
+				entradas.aFusificar = prepararEntradasDifusas();
+
+				return entradas;
+			}
+
+			function prepararEntradasNitidas(){
+				//pedir datos del perfil
+			}
+
+			function prepararEntradasDifusas(ubicacion, lugaresCercanos){
+				var entradasDifusas = {};
+
 				agregarDistanciasALugaresCercanos(ubicacion, lugaresCercanos); 
 				agregarVisitasMensualesALugares(lugaresCercanos); 
 
-				entradas.lugares = lugaresCercanos;
-				entradas.velocidadDeMovimiento = calcularVelocidadDeMovimiento(ubicacion); // Es una sola variable
+				entradasDifusas.lugares = lugaresCercanos;
+				entradasDifusas.velocidadDeMovimiento = calcularVelocidadDeMovimiento(ubicacion); // Es una sola variable
 
-				return entradas;
-			};
+				return entradasDifusas;
+			}
 
 			function agregarDistanciasALugaresCercanos(ubicacion, lugaresCercanos) {
 				//Trabajando con el objeto lugar del dominio
@@ -85,6 +95,6 @@ angular.module('starter')
 			}
 
 			function calcularVelocidadDeMovimiento(ubicacion) {			
-				return 10;
+				return 1;
 			}
 		}]);

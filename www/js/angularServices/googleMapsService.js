@@ -1,11 +1,10 @@
 angular.module('starter')
 	.factory('googleMaps', [function(){
-	  var gooleMapsService = new AdaptadorGoogleMaps();
+	  var googleMapsService = new AdaptadorGoogleMaps();
 	  var ubicacionActual;
 	  return {
 	    buscarLugaresCercanos: function(ubicacion) {
-	      //return getLugaresCercanos(ubicacion);
-	      return [];
+	    	return googleMapsService.buscarTodosLosNegociosCercanos(ubicacion);
 	    },
 	    getLugarActual: function(ubicacion){
 	    	return ;

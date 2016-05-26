@@ -1,3 +1,4 @@
+/*
 function Usuario(nombre, fechaNacimiento, sexo) {
 	this.nombre = nombre;
 	this.fechaNacimiento = fechaNacimiento;
@@ -5,7 +6,7 @@ function Usuario(nombre, fechaNacimiento, sexo) {
 	this.visitas = [];
 	this.lugaresQueLeGustan = []; //array de lugares
 }
-
+*/
 function Usuario(nombre, sexo, fechaNac, ubicacion) {
 	//this.id;
 	var fechaDeNacimiento = new Date(fechaNac);

@@ -1,9 +1,9 @@
 <ion-view view-title="Account">
   <ion-content>
     <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
+	    <a ng-repeat = 'user in users' ng-href = '#/tab/profile/{{user.id}}'>
+	    	{{user.nombre}} <br>
+	    </a>
     </ion-list>
   </ion-content>
 </ion-view>

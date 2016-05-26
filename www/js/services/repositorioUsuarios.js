@@ -1,3 +1,8 @@
+var SEXO = {
+	MASCULINO: 'Masculino',
+	FEMENINO: 'Femenino'
+}
+
 function BaseDeDatosDeUsuarios() {
 	this.Usuarios = [
 		{id: "123", nombre: "Leandro", sexo: SEXO.MASCULINO, src:"", fechaN: '11/27/1992', visitasUltimoMes: {}, visitasSemanales: {}}, 
@@ -13,8 +18,6 @@ function BaseDeDatosDeUsuarios() {
 	this.Usuarios[0].visitasSemanales[NEGOCIOS.VEA] = 1;
 	this.Usuarios[0].visitasSemanales[NEGOCIOS.CARREFOUR] = 2;
 	this.Usuarios[1].visitasSemanales[NEGOCIOS.CARREFOUR] = 5;
-
-
 }
 BaseDeDatosDeUsuarios.prototype.getTodosLosUsuarios = function() {
 	return this.Usuarios;

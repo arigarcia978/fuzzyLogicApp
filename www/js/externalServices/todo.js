@@ -1,7 +1,3 @@
-var SEXO = {
-	MASCULINO: 'Masculino',
-	FEMENINO: 'Femenino'
-}
 
 var variablesMotor = [
     'visitasMensualesAElBalón', 'visitasMensualesAMcDonalds', 'visitasMensualesABurgerKing',

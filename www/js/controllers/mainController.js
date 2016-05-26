@@ -5,7 +5,7 @@ angular.module('starter')
 
 		function getUbicacion(){
 			var ubicacion = new Ubicacion(41.50338, 2.17403, new Date(2016, 5, 24, 16, 40, 0, 0));
-			console.log(ubicacion);
+			
 			//$scope.ubicacion = new Ubicacion();
 			googleMaps.setUbicacionActual(ubicacion);
 			$scope.ubicacion = googleMaps.getUbicacionActual(); //del gps o googlemaps
