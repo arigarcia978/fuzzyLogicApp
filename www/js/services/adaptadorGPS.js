@@ -11,7 +11,6 @@ function AdaptadorGPS() {
    this.apiGPS = new geolocationApi();
 }
 AdaptadorGPS.prototype.getUbicacionActual = function(callback) {
-
    this.apiGPS.getCurrentPosition(function (posicionPura) {
       var u = new Ubicacion(
          posicionPura.coords.latitude, 
