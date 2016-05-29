@@ -86,7 +86,6 @@
       }],
       status : "OK"
    }
-   
 
    En cuanto a los términos y condiciones del servicio, 
    https://developers.google.com/places/web-service/policies

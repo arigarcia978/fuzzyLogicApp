@@ -1,16 +1,19 @@
 angular.module('starter')
 	.controller('LocationController', [
 		CONSTANTES.NOMBRE_FACTORY_GPS, 
+		CONSTANTES.NOMBRE_FACTORY_PLACES,
 		'googleMaps', 
 		'$rootScope', 
 		'fuzzyControllerService', 
 		'userService', 
 		'$stateParams', 
 		'$scope', 
-		function(servicioGPS, googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
+		function(servicioGPS, servicioGooglePlaces, googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
 			
 			//console.log('Dentro de location');
 			var ubicacionActual = servicioGPS.getUbicacionActual();
+			//Los lugares vienen ordenados del mas cerca al mas lejos - Pero sin traducir
+			var lugaresCercanoss = servicioGooglePlaces.buscarLugaresCercanos(ubicacionActual);
 			
 
 			var lugarActual;
