@@ -3,7 +3,6 @@ angular.module('starter')
 		function($rootScope, $scope, googleMaps){
 			/*
 		//setInterval(getUbicacion, 5000);
-		console.log('holi main');
 
 		function getUbicacion(){
 

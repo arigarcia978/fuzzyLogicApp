@@ -72,6 +72,7 @@ function AdaptadorGoogleMaps() {
 			ubicacion: new Ubicacion("23.56589209", "54.12198742")
 		}
 	*/
+
 	this.BDLugares = [];
 	this.BDLugares.push(new Lugar(
 		[NEGOCIOS.MCDONALD], 

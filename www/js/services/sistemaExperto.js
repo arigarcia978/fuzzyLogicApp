@@ -2,7 +2,6 @@ function SistemaExperto() {
 	//this.engine = new InfernalEngine();
     this.engine = new InferenceEngine();
 }
-
 SistemaExperto.prototype.setBaseDeHechosNitida = function(lugares){
 	/*
         var engine = this.engine;
@@ -164,7 +163,6 @@ SistemaExperto.prototype.inferir = function(){
     */
     return this.engine.getResultados();
 }
-
 SistemaExperto.prototype.ejecutar = function(lugares, entradasFusificadas){
     this.setBaseDeHechosDifusa(entradasFusificadas);
     this.setBaseDeHechosNitida(lugares);
