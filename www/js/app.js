@@ -46,7 +46,7 @@ angular.module('starter', ['ionic'])
     views: {
       'tab-dash': {
         templateUrl: 'templates/tab-dash.html',
-        controller: 'LocationController'
+        controller: 'MainController'
       }
     }
   })
@@ -56,7 +56,7 @@ angular.module('starter', ['ionic'])
       views: {
         'tab-chats': {
           templateUrl: 'templates/tab-chats.html',
-          controller: 'ProfileController'
+          controller: 'LocationController'
         }
       }
     })

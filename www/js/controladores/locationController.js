@@ -45,6 +45,7 @@ angular.module('starter')
 			actualizarUbicacion();
 			*/
 
+			//$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
 			function actualizarUbicacion(){
 				ubicacionAnterior = userService.getUltimaUbicacion();
 				//var nuevaUbicacion = googleMaps.getUbicacionActual();
