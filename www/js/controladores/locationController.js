@@ -11,10 +11,21 @@ angular.module('starter')
 		function(servicioGPS, servicioGooglePlaces, googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
 			
 			//console.log('Dentro de location');
-			var ubicacionActual = servicioGPS.getUbicacionActual();
-			//Los lugares vienen ordenados del mas cerca al mas lejos - Pero sin traducir
-			var lugaresCercanoss = servicioGooglePlaces.buscarLugaresCercanos(ubicacionActual);
-			
+			servicioGPS.getUbicacionActual(function(ubicacionActual) {
+				//Los lugares vienen ordenados del mas cerca al mas lejos
+				servicioGooglePlaces.buscarLugaresCercanos(ubicacionActual, 'food', function(lugaresCercanos) {
+					console.log(ubicacionActual);
+					console.log(lugaresCercanos);
+
+
+					//Poner toda la lógica dependiente acá?
+
+
+
+				});
+			});
+
+			/*
 
 			var lugarActual;
 			var ubicacionAnterior;
@@ -137,4 +148,5 @@ angular.module('starter')
 			function calcularVelocidadDeMovimiento(ubicacion) {			
 				return 1;
 			}
+			*/
 		}]);
