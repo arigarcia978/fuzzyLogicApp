@@ -10,23 +10,31 @@ angular.module('starter')
 		'$scope', 
 		function(servicioGPS, servicioGooglePlaces, googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
 			
-			//console.log('Dentro de location');
-			servicioGPS.getUbicacionActual(function(ubicacionActual) {
-				//Los lugares vienen ordenados del mas cerca al mas lejos
-				servicioGooglePlaces.buscarLugaresCercanos(ubicacionActual, 'food', function(lugaresCercanos) {
-					console.log(ubicacionActual);
-					console.log(lugaresCercanos);
-
-
-					//Poner toda la lógica dependiente acá?
-
-
-
-				});
+			var ubicacionActual, lugaresCercanos;
+			
+			cargarInformacionDiferida(function(ubicacion, lugares) {
+				ubicacionActual = ubicacion;
+				lugaresCercanos = lugares;
 			});
 
-			/*
+			function cargarInformacionDiferida(callback) {
+				servicioGPS.getUbicacionActual(function(ubicacion) {
+					servicioGooglePlaces.buscarLugaresCercanos(ubicacion, 'food', function(lugares) {
+						//Los lugares vienen ordenados del mas cerca al mas lejos
+						callback(ubicacion, lugares);
+					});
+				});
+			}
 
+
+			function mostrarUbicacionYLugares() {
+				console.log('Entro...');
+				console.log(ubicacionActual);
+				console.log(lugaresCercanos);
+				console.log('Salgo...');
+			}
+
+			/*
 			var lugarActual;
 			var ubicacionAnterior;
 			var motorMatematico = new MotorMatematico();
@@ -35,6 +43,7 @@ angular.module('starter')
 			$scope.user = userService.getUsuario(id);
 			console.log($scope.user);
 			actualizarUbicacion();
+			*/
 
 			function actualizarUbicacion(){
 				ubicacionAnterior = userService.getUltimaUbicacion();
@@ -148,5 +157,5 @@ angular.module('starter')
 			function calcularVelocidadDeMovimiento(ubicacion) {			
 				return 1;
 			}
-			*/
+
 		}]);
