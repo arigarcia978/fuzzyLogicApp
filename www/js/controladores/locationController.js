@@ -1,6 +1,18 @@
 angular.module('starter')
-	.controller('LocationController', ['googleMaps', '$rootScope', 'fuzzyControllerService', 'userService', '$stateParams', '$scope', 
-		function(googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
+	.controller('LocationController', [
+		CONSTANTES.NOMBRE_FACTORY_GPS, 
+		'googleMaps', 
+		'$rootScope', 
+		'fuzzyControllerService', 
+		'userService', 
+		'$stateParams', 
+		'$scope', 
+		function(servicioGPS, googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
+			
+			//console.log('Dentro de location');
+			var ubicacionActual = servicioGPS.getUbicacionActual();
+			
+
 			var lugarActual;
 			var ubicacionAnterior;
 			var motorMatematico = new MotorMatematico();

@@ -23,5 +23,4 @@ AdaptadorGPS.prototype.getUbicacionActual = function(callback) {
 
       callback(u);
    });
-
 };
