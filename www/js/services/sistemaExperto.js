@@ -69,6 +69,7 @@ SistemaExperto.prototype.agregarReglas = function(entradasFusificadas, entradasN
         var frecuente = engine.get('visitasFrecuentesA'+nombreDeLugar);
         var muyFrecuente = engine.get('visitasMuyFrecuentesA'+nombreDeLugar);
         //var leGusta = engine.get('leGustaEnFB'+nombreDeLugar);
+            
         engine.set('leGusta', 0.5);
         var leGusta = engine.get('leGusta');
 
@@ -596,6 +597,7 @@ SistemaExperto.prototype.inferir = function(se){
 	    // will print "5"
 	    console.log(engine.get("i"));
         console.log(engine.get("bai"));
+        console.log(engine.get('leGustaPoco'));
 	});
 }
 
