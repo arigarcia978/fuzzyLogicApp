@@ -1,54 +1,15 @@
 angular.module('starter')
-	.controller('LocationController', [
-		CONSTANTES.NOMBRE_FACTORY_GPS, 
-		CONSTANTES.NOMBRE_FACTORY_PLACES,
-		'googleMaps', 
-		'$rootScope', 
-		'fuzzyControllerService', 
-		'userService', 
-		'$stateParams', 
-		'$scope', 
-		function(servicioGPS, servicioGooglePlaces, googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
-			
-			var ubicacionActual, lugaresCercanos;
-			
-			cargarInformacionDiferida(function(ubicacion, lugares) {
-				ubicacionActual = ubicacion;
-				lugaresCercanos = lugares;
-			});
-
-			function cargarInformacionDiferida(callback) {
-				servicioGPS.getUbicacionActual(function(ubicacion) {
-					servicioGooglePlaces.buscarLugaresCercanos(ubicacion, 'food', function(lugares) {
-						//Los lugares vienen ordenados del mas cerca al mas lejos
-						callback(ubicacion, lugares);
-					});
-				});
-			}
-
-
-			function mostrarUbicacionYLugares() {
-				console.log('Entro...');
-				console.log(ubicacionActual);
-				console.log(lugaresCercanos);
-				console.log('Salgo...');
-			}
-
-			/*
+	.controller('LocationController', ['googleMaps', '$rootScope', 'fuzzyControllerService', 'userService',
+		function(googleMaps, $rootScope, fuzzyControllerService, userService){
 			var lugarActual;
 			var ubicacionAnterior;
-			*/
 			var motorMatematico = new MotorMatematico();
-			var id = $stateParams.id;
-			$scope.user = userService.getUsuario(id);
-			console.log($scope.user);
 
-			actualizarUbicacion();
+			console.log('holi location');
 
-			function actualizarUbicacion(){
+			$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
 				ubicacionAnterior = userService.getUltimaUbicacion();
-				//var nuevaUbicacion = googleMaps.getUbicacionActual();
-				var nuevaUbicacion = new Ubicacion(41.50338, 2.17403, new Date(2016, 5, 24, 16, 40, 0, 0));
+				var nuevaUbicacion = googleMaps.getUbicacionActual();
 				var lugaresCercanos;										//Array de lugar (Del dominio)
 
 				var seMovió = compararUbicaciones(ubicacionAnterior, nuevaUbicacion);
@@ -58,7 +19,7 @@ angular.module('starter')
 					console.log('se movió');
 					lugarActual = googleMaps.getLugarActual(nuevaUbicacion);
 					lugaresCercanos = googleMaps.buscarLugaresCercanos(nuevaUbicacion);
-					var entradas = prepararEntradas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos);
+					var entradas = prepararEntradas(nuevaUbicacion, lugaresCercanos);
 
 					fuzzyControllerService.getPromocionesAOfrecer(entradas);
 					actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion);
@@ -66,14 +27,14 @@ angular.module('starter')
 					console.log('no se movio');
 					comprobarSiEsVisita(ubicacionAnterior, nuevaUbicacion);
 				}
-			}
+			});
 
 			function compararUbicaciones(ubicacionAnterior, nuevaUbicacion){
 				var distancia = motorMatematico.calcularDistanciaEnKMEntreUbicaciones(ubicacionAnterior, nuevaUbicacion);
 				var distanciaEnMetros = motorMatematico.convertirKMaMetros(distancia);
 				console.log('distancia' + distanciaEnMetros);
 				if(distancia == 0){
-					return false;
+				return false;
 				} else return true;
 			}
 
@@ -91,74 +52,51 @@ angular.module('starter')
 				userService.actualizarUltimaUbicacion(nuevaUbicacion);
 			}
 
-			function prepararEntradas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos){
+			function prepararEntradas(ubicacion, lugaresCercanos){
 				var entradas = {};
 
-				prepararEntradasNitidas(lugaresCercanos);
-				entradas = prepararEntradasDifusas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos);
+				entradas.nitidas = prepararEntradasNitidas();
+				entradas.aFusificar = prepararEntradasDifusas();
 
 				return entradas;
 			}
 
-			function prepararEntradasNitidas(lugaresCercanos){
-				agregarMeGustaALugares(lugaresCercanos);
+			function prepararEntradasNitidas(){
+				//pedir datos del perfil
 			}
 
-			function prepararEntradasDifusas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos){
-				var entradas = {};
+			function prepararEntradasDifusas(ubicacion, lugaresCercanos){
+				var entradasDifusas = {};
 
-				agregarDistanciasALugaresCercanos(nuevaUbicacion, lugaresCercanos); 
-				agregarVisitasMensualesALugares(lugaresCercanos);
+				agregarDistanciasALugaresCercanos(ubicacion, lugaresCercanos); 
+				agregarVisitasMensualesALugares(lugaresCercanos); 
 
-				entradas.lugares = lugaresCercanos;
-				entradas.velocidadDeMovimiento = calcularVelocidadDeMovimiento(nuevaUbicacion, ubicacionAnterior); // Es una sola variable
+				entradasDifusas.lugares = lugaresCercanos;
+				entradasDifusas.velocidadDeMovimiento = calcularVelocidadDeMovimiento(ubicacion); // Es una sola variable
 
-				return entradas;
+				return entradasDifusas;
 			}
 
 			function agregarDistanciasALugaresCercanos(ubicacion, lugaresCercanos) {
 				//Trabajando con el objeto lugar del dominio
-				for (var i = 0; i < lugaresCercanos.length; i++) {
-					var lugar = lugaresCercanos[i];
+				for (lugar in lugaresCercanos) {
 					lugar.setDistancia(calcularDistanciaAlLugarCercano(ubicacion, lugar.ubicacion));
 				}
 			}
 
 			function agregarVisitasMensualesALugares(lugaresCercanos) {
-				for (var i = 0; i < lugaresCercanos.length; i++) {
-					var lugar = lugaresCercanos[i];
+				for (lugar in lugaresCercanos) {
 					lugar.setCantidadDeVisitasMensuales(calcularVisitasMensualesAlLugar(lugar.nombre));
 				}
 			}
 
-			function agregarMeGustaALugares(lugaresCercanos){
-				var meGustas = userService.getMeGustasDeUsuario(id);
-				
-				for(var j = 0; j < meGustas.length; j++){
-					for (var i = 0; i < lugaresCercanos.length; i++) {
-						var lugar = lugaresCercanos[i];
-						if(meGustas[j] == lugar.nombre){
-							lugar.meGusta = true;
-						}
-					}
-				}
-			}
-
-			function calcularVisitasMensualesAlLugar(lugar){
-				return userService.getVisitasALugar(id, lugar);
-			}
+			function calcularVisitasMensualesAlLugar(lugaresCercanos){}
 
 			function calcularDistanciaAlLugarCercano(ubicacion, ubicacionLugar){
-				var distanciaEnKM = motorMatematico.calcularDistanciaEnKMEntreUbicaciones(ubicacion, ubicacionLugar);
-				var distanciaEnMetros = motorMatematico.convertirKMaMetros(distanciaEnKM)
-				return distanciaEnMetros;
+				return 0;
 			}
 
-			function calcularVelocidadDeMovimiento(nuevaUbicacion, ubicacionAnterior) {
-				//ni idea si esta bien hecha la funcion jeje
-				var velocidad = motorMatematico.calcularVelocidadDeMovimiento(nuevaUbicacion, ubicacionAnterior);
-				console.log(velocidad);
-				return velocidad;
+			function calcularVelocidadDeMovimiento(ubicacion) {			
+				return 1;
 			}
-
 		}]);

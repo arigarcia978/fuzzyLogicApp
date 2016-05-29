@@ -1,10 +1,9 @@
 angular.module('starter')
 	.controller('MainController', ['$rootScope', '$scope','googleMaps',  
 		function($rootScope, $scope, googleMaps){
-		
-		/*
->>>>>>> a4fd19787edb81305294209dda543f5ec0ebdc74:www/js/controladores/mainController.js
+			/*
 		//setInterval(getUbicacion, 5000);
+		console.log('holi main');
 
 		function getUbicacion(){
 
