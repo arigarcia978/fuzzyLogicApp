@@ -1,4 +1,6 @@
-function MotorMatematico() {}
+function MotorMatematico() {
+
+}
 
 MotorMatematico.prototype.calcularEdad = function(fecha) {
 	var edadEnMilisegundos = Date.now() - fecha.getTime();
@@ -27,3 +29,5 @@ MotorMatematico.prototype.calcularDistanciaEnKMEntreUbicaciones = function(ubica
 MotorMatematico.prototype.gradosARadianes = function(grados) {
 	return grados * (Math.PI/180);
 }
+
+var motorMatematico = new MotorMatematico();

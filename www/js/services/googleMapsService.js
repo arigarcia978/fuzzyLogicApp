@@ -12,7 +12,7 @@ GoogleMapsService.prototype.getUbicacion = function(){
                     return a;
                 })
 		}
-*/
+*/ 
 
 var NEGOCIOS = {
 	MCDONALD: 'McDonalds',

@@ -1,5 +1,4 @@
-angular.module('starter')
-	.factory('googleMaps', [function(){
+angular.module('starter').factory('googleMaps', [function(){
 	  var googleMapsService = new AdaptadorGoogleMaps();
 	  var ubicacionActual;
 	  return {
@@ -20,3 +19,18 @@ angular.module('starter')
 	    }
 	  }
 	}]);
+
+angular.module(CONSTANTES.NOMBRE_MODULO)
+   .factory(CONSTANTES.NOMBRE_FACTORY_PLACES, function() {
+
+      var places = new AdaptadorGooglePlaces();
+
+      return {
+         buscarLugaresCercanos: function(ubicacion, tipo, callback) {
+				places.buscarTodosLosNegociosCercanos(ubicacion, tipo, function(lugares) {
+					callback(lugares);
+				});
+			}
+      }
+
+   });

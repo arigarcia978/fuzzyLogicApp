@@ -1,7 +1,7 @@
 function Ubicacion(latitud, longitud, momento) {
   this.latitud = latitud;
   this.longitud = longitud;
-  this.momento = momento;
+  this.momento = (momento) ? momento : new Date();
 }
 
 Ubicacion.prototype.getLatitud = function(){

@@ -1,6 +1,45 @@
 angular.module('starter')
+<<<<<<< HEAD:www/js/controllers/locationController.js
 	.controller('LocationController', ['googleMaps', '$rootScope', 'fuzzyControllerService', 'userService', '$stateParams', '$scope', 
 		function(googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
+=======
+	.controller('LocationController', [
+		CONSTANTES.NOMBRE_FACTORY_GPS, 
+		CONSTANTES.NOMBRE_FACTORY_PLACES,
+		'googleMaps', 
+		'$rootScope', 
+		'fuzzyControllerService', 
+		'userService', 
+		'$stateParams', 
+		'$scope', 
+		function(servicioGPS, servicioGooglePlaces, googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
+			
+			var ubicacionActual, lugaresCercanos;
+			
+			cargarInformacionDiferida(function(ubicacion, lugares) {
+				ubicacionActual = ubicacion;
+				lugaresCercanos = lugares;
+			});
+
+			function cargarInformacionDiferida(callback) {
+				servicioGPS.getUbicacionActual(function(ubicacion) {
+					servicioGooglePlaces.buscarLugaresCercanos(ubicacion, 'food', function(lugares) {
+						//Los lugares vienen ordenados del mas cerca al mas lejos
+						callback(ubicacion, lugares);
+					});
+				});
+			}
+
+
+			function mostrarUbicacionYLugares() {
+				console.log('Entro...');
+				console.log(ubicacionActual);
+				console.log(lugaresCercanos);
+				console.log('Salgo...');
+			}
+
+			/*
+>>>>>>> a4fd19787edb81305294209dda543f5ec0ebdc74:www/js/controladores/locationController.js
 			var lugarActual;
 			var ubicacionAnterior;
 			var motorMatematico = new MotorMatematico();
@@ -9,8 +48,13 @@ angular.module('starter')
 			$scope.user = userService.getUsuario(id);
 			console.log($scope.user);
 			actualizarUbicacion();
+<<<<<<< HEAD:www/js/controllers/locationController.js
 
 			//$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
+=======
+			*/
+
+>>>>>>> a4fd19787edb81305294209dda543f5ec0ebdc74:www/js/controladores/locationController.js
 			function actualizarUbicacion(){
 				ubicacionAnterior = userService.getUltimaUbicacion();
 				//var nuevaUbicacion = googleMaps.getUbicacionActual();
@@ -33,7 +77,10 @@ angular.module('starter')
 					comprobarSiEsVisita(ubicacionAnterior, nuevaUbicacion);
 				}
 			}
+<<<<<<< HEAD:www/js/controllers/locationController.js
 			//);
+=======
+>>>>>>> a4fd19787edb81305294209dda543f5ec0ebdc74:www/js/controladores/locationController.js
 
 			function compararUbicaciones(ubicacionAnterior, nuevaUbicacion){
 				var distancia = motorMatematico.calcularDistanciaEnKMEntreUbicaciones(ubicacionAnterior, nuevaUbicacion);
@@ -124,4 +171,5 @@ angular.module('starter')
 			function calcularVelocidadDeMovimiento(ubicacion) {			
 				return 1;
 			}
+
 		}]);
