@@ -14,6 +14,9 @@ angular.module('starter')
 	    	},
 	    	getUsuario: function(id){
 	    		return repositorioUsuarios.getUsuarioPorId(id);
+	    	},
+	    	getMeGustasDeUsuario: function(id){
+	    		return repositorioUsuarios.getLugaresConMeGusta(id);
 	    	}
 	  	}
 	}]);

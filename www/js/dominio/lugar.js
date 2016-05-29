@@ -1,9 +1,11 @@
-function Lugar(nombre, ubicacion){
+function Lugar(nombre, ubicacion, tipoLugar){
 	this.nombre = nombre;
 	this.ubicacion = ubicacion;
+	this.tipoLugar = '';
 	this.distancia = -1;
 	this.cantidadDeVisitasMensuales = -1;
 	this.rubro = {};
+	this.meGusta = false;
 }
 Lugar.prototype.setDistancia = function(distancia) {
 	this.distancia = distancia;

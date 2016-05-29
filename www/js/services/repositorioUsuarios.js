@@ -5,8 +5,8 @@ var SEXO = {
 
 function BaseDeDatosDeUsuarios() {
 	this.Usuarios = [
-		{id: "123", nombre: "Leandro", sexo: SEXO.MASCULINO, src:"", fechaN: '11/27/1992', visitasUltimoMes: {}, visitasSemanales: {}}, 
-		{id: "212", nombre: "Ariana", sexo: SEXO.FEMENINO, src:"", fechaN: '12/07/1993', visitasUltimoMes: {}, visitasSemanales: {}}
+		{id: "123", nombre: "Leandro", sexo: SEXO.MASCULINO, src:"", fechaN: '11/27/1992', visitasUltimoMes: {}, visitasSemanales: {}, lugaresConMeGusta: []}, 
+		{id: "212", nombre: "Ariana", sexo: SEXO.FEMENINO, src:"", fechaN: '12/07/1993', visitasUltimoMes: {}, visitasSemanales: {}, lugaresConMeGusta: []}
 	];
 
 	this.Usuarios[0].visitasUltimoMes[NEGOCIOS.RECORCHOLIS] = 14;
@@ -18,6 +18,9 @@ function BaseDeDatosDeUsuarios() {
 	this.Usuarios[0].visitasSemanales[NEGOCIOS.VEA] = 1;
 	this.Usuarios[0].visitasSemanales[NEGOCIOS.CARREFOUR] = 2;
 	this.Usuarios[1].visitasSemanales[NEGOCIOS.CARREFOUR] = 5;
+
+	this.Usuarios[0].lugaresConMeGusta = [NEGOCIOS.RECORCHOLIS, NEGOCIOS.MCDONALD, NEGOCIOS.BURGER_KING];
+	this.Usuarios[1].lugaresConMeGusta = [NEGOCIOS.LA_PIZZADA, NEGOCIOS.VEA, NEGOCIOS.CARREFOUR];
 }
 BaseDeDatosDeUsuarios.prototype.getTodosLosUsuarios = function() {
 	return this.Usuarios;
@@ -26,6 +29,13 @@ BaseDeDatosDeUsuarios.prototype.getUsuarioPorId = function(id) {
 	for (var i = 0; i < this.getTodosLosUsuarios().length; i++) {
 		if (this.getTodosLosUsuarios()[i].id == id) {
 			return this.getTodosLosUsuarios()[i];
+		}
+	}
+}
+BaseDeDatosDeUsuarios.prototype.getLugaresConMeGusta = function(id){
+	for (var i = 0; i < this.Usuarios.length; i++) {
+		if(this.Usuarios[i].id == id){
+			return this.Usuarios[i].lugaresConMeGusta;
 		}
 	}
 }

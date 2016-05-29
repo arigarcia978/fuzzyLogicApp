@@ -2,77 +2,166 @@ function SistemaExperto() {
 	this.engine = new InfernalEngine();
 }
 
-SistemaExperto.prototype.setBaseDeHechosNítida = function(entradasNitidas){
-	// Set a value to the fact "i"
-	this.engine.set("i", 1);
+SistemaExperto.prototype.setBaseDeHechosNitida = function(entradasNitidas){
+	var engine = this.engine;
+    engine.set("i", 1);
+
+    //setear me gustas
+    //una sola variable de MG. si si le gusta, vale 1, sino le gusta vale 0 o 0.3. algo bajo
 }
 
-SistemaExperto.prototype.setBaseDeHechosDifusa = function(entradasFusificadas){}
+SistemaExperto.prototype.setBaseDeHechosDifusa = function(entradasFusificadas){
+    var engine = this.engine;
 
-SistemaExperto.prototype.agregarReglas = function(){
+    //seteo frecuencia difusa a lugares
+    var frecuenciaDeLugares = entradasFusificadas.frecuenciaDeLugares;
+    for(var i = 0; i < frecuenciaDeLugares.length; i++){
+        var lugar = frecuenciaDeLugares[i];
+        
+        var nombreDeLugar = lugar.nombre;
+        var probabilidades = lugar.probabilidades;
+        
+        engine.set('visitasPocosFrecuentesA'+nombreDeLugar, probabilidades.pocoFrecuente);  
+        engine.set('visitasFrecuentesA'+nombreDeLugar, probabilidades.frecuente);
+        engine.set('visitasMuyFrecuentesA'+nombreDeLugar, probabilidades.muyFrecuente);
+    }
+
+    //seteo distancia difusa a cada lugar
+    var distanciasACadaLugar = entradasFusificadas.distanciasACadaLugar;
+    for(var i = 0; i < distanciasACadaLugar.length; i++){
+        var lugar = distanciasACadaLugar[i];
+
+        var nombreDeLugar = lugar.nombre;
+        var probabilidades = lugar.probabilidades;
+        
+        engine.set('distanciaMuyCortaA'+nombreDeLugar, probabilidades.muyCorta);
+        engine.set('distanciaCortaA'+nombreDeLugar, probabilidades.corta);
+        engine.set('distanciaMediaA'+nombreDeLugar, probabilidades.media);
+        engine.set('distanciaGrandeA'+nombreDeLugar, probabilidades.grande);//o grande
+    }
+
+    //seteo movilidad
+    var movilidad = entradasFusificadas.movilidad;
+    var probabilidades = movilidad.probabilidades;
+    
+    engine.set('movilidadLenta', probabilidades.lento);
+    engine.set('movilidadRapida', probabilidades.rapido);
+}
+
+SistemaExperto.prototype.agregarReglas = function(entradasFusificadas, entradasNitidas, callback){
+    var engine = this.engine;
+    
+    //reglas de le gusta mucho, poco, normal
+    var frecuenciaDeLugares = entradasFusificadas.frecuenciaDeLugares;
+
+    engine.addRule('holix', function(done){
+        if(this.get('visitasFrecuentesACarrefour')){
+            engine.set('bai', 5);
+        }
+        done();
+    });
+
+    for(var i = 1; i <= frecuenciaDeLugares.length; i++){
+        var nombreDeLugar = frecuenciaDeLugares[i-1].nombre;
+        console.log(nombreDeLugar);
+        var pocoFrecuente = engine.get('visitasPocosFrecuentesA'+nombreDeLugar);
+        console.log(pocoFrecuente);
+        var frecuente = engine.get('visitasFrecuentesA'+nombreDeLugar);
+        var muyFrecuente = engine.get('visitasMuyFrecuentesA'+nombreDeLugar);
+        //var leGusta = engine.get('leGustaEnFB'+nombreDeLugar);
+        engine.set('leGusta', 0.5);
+        var leGusta = engine.get('leGusta');
+
+        engine.addRule('reglasMeGustaPoco'+i, function(done){
+            var pocoFrecuente = engine.get('visitasPocosFrecuentesA'+nombreDeLugar);
+            var leGusta = engine.get('leGusta');
+            if(pocoFrecuente && leGusta){
+                if(pocoFrecuente <= leGusta){
+                    this.set('leGustaPoco'+nombreDeLugar, pocoFrecuente);
+                } else {
+                    this.set('leGustaPoco'+nombreDeLugar, leGusta);
+                }
+            }
+            console.log('visitas'+i);
+            done();
+        });
+
+        engine.addRule('reglasMeGustaMasomenos'+i, function(done){
+            var frecuente = engine.get('visitasFrecuentesA'+nombreDeLugar);
+            var leGusta = engine.get('leGusta');
+            if(engine.get('visitasFrecuentesA'+nombreDeLugar) && engine.get('leGusta')){
+                if(engine.get('visitasFrecuentesA'+nombreDeLugar) <= engine.get('leGusta')){
+                    this.set('leGustaMasomenos'+nombreDeLugar, engine.get('visitasFrecuentesA'+nombreDeLugar));
+                } else {
+                    this.set('leGustaMasomenos'+nombreDeLugar, engine.get('leGusta'));
+                }
+            }
+            done();
+        });
+
+        engine.addRule('reglasMeGustaMucho3'+i, function(done){
+            if(muyFrecuente && leGusta){
+                if(muyFrecuente <= leGusta){
+                    this.set('leGustaMucho'+nombreDeLugar, muyFrecuente);
+                } else {
+                    this.set('leGustaMucho'+nombreDeLugar, leGusta);
+                }
+            }
+            done();
+        });
+
+        var leGustaPoco = engine.get('leGustaPoco'+nombreDeLugar);
+        var leGustaMasomenos = engine.get('leGustaMasomenos'+nombreDeLugar);
+        var leGustaMucho = engine.get('leGustaMucho'+nombreDeLugar);
+
+        var estaMuyCerca = engine.get('distanciaMuyCortaA'+nombreDeLugar);
+        var estaCerca = engine.get('distanciaCortaA'+nombreDeLugar);
+        var estaMasomenosLejos = engine.get('distanciaMediaA'+nombreDeLugar);
+        var estaLejos = engine.get('distanciaGrandeA'+nombreDeLugar);
+
+        var vaLento = engine.get('movilidadLenta');
+        var vaRapido = engine.get('movilidadRapida');
+
+        engine.addRule('gettingOfrecerPromociones'+i, function(done){
+            if(leGustaPoco && vaLento){
+                if(leGustaPoco <= vaLento){
+                    this.set('ofrecerPromociones'+nombreDeLugar, leGustaPoco);
+                } else {
+                    this.set('ofrecerPromociones'+nombreDeLugar, vaLento);
+                }
+            }
+        });
+
+
+    }
+
+    callback(entradasNitidas, entradasFusificadas, this, this.inferir);
+    //numeroDeLugaresDeXTipoQueLeGustan???
+    //estaCercaAlgunLugarDeXRubro???
+
+
 	// Adds a rule named "increment" to increment the value of 'i' up to 5.
 	/*
-	var engine = this.engine;
+    	var engine = this.engine;
 
-	engine.addRule("increment", function(done) {
-	    var i = this.get("i");
-	    if (i < 5) {
-	        i++;
-	    } else if (i > 5) {
-	        done(new Error("'i' must be lower or equal to 5."));
-	        return;
-	    }
-	    this.set("i", i);
-	    done();
-	});
-*/
+    	engine.addRule("increment", function(done) {
+    	    var i = this.get("i");
+    	    if (i < 5) {
+    	        i++;
+    	    } else if (i > 5) {
+    	        done(new Error("'i' must be lower or equal to 5."));
+    	        return;
+    	    }
+    	    this.set("i", i);
+    	    done();
+    	});
+    */
+
 	// ------------------------------------ BAR RESTAURANTE ------------------------------------     
     // Adds a rule named "increment" to increment the value of 'i' up to 5.
-    engine.addRule("regla1", function(done) {
-        if(this.get('visitasMensualesAElBalón') >= 2) {
-            this.set('leGustaElBalón', true);
-        } else {
-            this.set('leGustaElBalón', false);
-        }
-        done();
-    });
 
-    engine.addRule('regla3', function(done){
-        if(this.get('leGustaElBalón') && this.get('ElBalónEsBarRestaurante')) {
-            var numero = this.get('numeroDeLugaresQueLeGustanDeRestaurantes');
-            this.set('numeroDeLugaresQueLeGustanDeRestaurantes', numero+1);
-            done();
-        }
-        done();
-    });
 
-    engine.addRule("regla4", function(done) {
-        if(this.get('visitasMensualesAMil99') > 2) {
-            this.set('leGustaMil99', true);
-        } else {
-            this.set('leGustaMil99', false);
-        }
-        done();
-    });
-
-    engine.addRule('regla5', function(done){
-        if(this.get('leGustaMil99') && this.get('Mil99EsBarRestaurante')) {
-            var numero = this.get('numeroDeLugaresQueLeGustanDeRestaurantes');
-            this.set('numeroDeLugaresQueLeGustanDeRestaurantes', numero+1);
-            done();
-        }
-        done();
-    });
-
-    engine.addRule('regla6', function(done) {
-        if(this.get('numeroDeLugaresQueLeGustanDeRestaurantes') > 3) {
-            this.set('leGustaBarRestaurante', true);
-        } else {
-            this.set('leGustaBarRestaurante', false);
-        }
-        done();
-    });
-
+/*
     engine.addRule('regla7', function(done) {
         if(this.get('estaCercaElBalón') || this.get('estaCercaMil99') && this.get('ElBalónEsBarRestaurante')) {
             this.set('estaCercaBarRestaurante', true);
@@ -491,12 +580,13 @@ SistemaExperto.prototype.agregarReglas = function(){
               }
               done();
           });
-
+*/
 }
 
-SistemaExperto.prototype.inferir = function(){
+SistemaExperto.prototype.inferir = function(se){
+    console.log(se);
 	// launches inference
-	var engine = this.engine;
+	var engine = se.engine;
 	engine.infer(function(err) {
 	    if (err) {
 	        console.log(err);
@@ -505,15 +595,25 @@ SistemaExperto.prototype.inferir = function(){
 
 	    // will print "5"
 	    console.log(engine.get("i"));
+        console.log(engine.get("bai"));
 	});
 }
 
+SistemaExperto.prototype.setBaseDeHechos = function(entradasNitidas, entradasFusificadas, se, callback){
+    se.setBaseDeHechosDifusa(entradasFusificadas);
+    se.setBaseDeHechosNitida(entradasNitidas);
+    console.log(se);
+    callback(se);
+}
+
 SistemaExperto.prototype.ejecutar = function(entradasNitidas, entradasFusificadas){
-	console.log('llega a ejecutar SE');
-	this.agregarReglas();
-	this.setBaseDeHechosNítida(entradasNitidas);
-	this.setBaseDeHechosDifusa(entradasFusificadas);
-	this.inferir();
+    this.agregarReglas(entradasFusificadas, entradasNitidas, this.setBaseDeHechos);
+    this.setBaseDeHechosDifusa(entradasFusificadas);
+    this.setBaseDeHechosNitida(entradasNitidas);
+    //this.agregarReglas(entradasFusificadas, entradasNitidas, this.setBaseDeHechos);
+    
+    console.log(this.engine);
+	//this.inferir();
 }
 
 /*
