@@ -15,6 +15,8 @@ angular.module('starter')
 			cargarInformacionDiferida(function(ubicacion, lugares) {
 				ubicacionActual = ubicacion;
 				lugaresCercanos = lugares;
+
+				
 			});
 
 			function cargarInformacionDiferida(callback) {

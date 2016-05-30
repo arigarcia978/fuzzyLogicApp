@@ -112,7 +112,7 @@ var google = {
             this.mapa = mapa;
          },
          PlacesServiceStatus: {
-            OK: 100
+            OK: 200
          }
       }
    }
