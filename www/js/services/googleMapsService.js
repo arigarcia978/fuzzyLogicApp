@@ -14,6 +14,7 @@
 		}
 */ 
 
+/*
 var NEGOCIOS = {
 	MCDONALD: 'McDonalds',
 	LA_PIZZADA: 'La Pizzada',
@@ -27,6 +28,7 @@ var NEGOCIOS = {
 	VEA: 'Vea',
 	CARREFOUR: 'Carrefour'
 }
+*/
 
 function AdaptadorGoogleMaps() {
 	//this.BDLugares = {};

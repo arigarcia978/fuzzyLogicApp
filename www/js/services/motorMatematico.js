@@ -18,16 +18,23 @@ MotorMatematico.prototype.convertirKMaMetros = function(km) {
 MotorMatematico.prototype.convertirHorasASegundos = function(horas){
 	return horas * 3600;
 }
+MotorMatematico.prototype.calcularDistanciaEnMetrosEntreUbicaciones = function(ubicacion1, ubicacion2) {
+	return this.convertirKMaMetros(this.calcularDistanciaEnKMEntreUbicaciones(ubicacion1, ubicacion2));
+};
 MotorMatematico.prototype.calcularDistanciaEnKMEntreUbicaciones = function(ubicacion1, ubicacion2) {
-	var radioDeLaTierraEnKM = 6371;
-	var distanciaEntreLatitudes = this.gradosARadianes(ubicacion1.getLatitud() - ubicacion2.getLatitud());
-	var distanciaEntreLongitudes = this.gradosARadianes(ubicacion1.getLongitud() - ubicacion2.getLongitud());
+	if (esUnaInstancia(ubicacion1, Ubicacion) && esUnaInstancia(ubicacion2, Ubicacion)) {
+		var radioDeLaTierraEnKM = 6371;
+		var distanciaEntreLatitudes = this.gradosARadianes(ubicacion1.getLatitud() - ubicacion2.getLatitud());
+		var distanciaEntreLongitudes = this.gradosARadianes(ubicacion1.getLongitud() - ubicacion2.getLongitud());
 
-	var a = Math.sin(distanciaEntreLatitudes/2) * Math.sin(distanciaEntreLatitudes/2) + 
-			Math.cos(this.gradosARadianes(ubicacion1.getLatitud())) * Math.cos(this.gradosARadianes(ubicacion2.getLatitud())) * 
-			Math.sin(distanciaEntreLongitudes/2) * Math.sin(distanciaEntreLongitudes/2);
-	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt( 1 - a ));
-	return radioDeLaTierraEnKM * c;
+		var a = Math.sin(distanciaEntreLatitudes/2) * Math.sin(distanciaEntreLatitudes/2) + 
+				Math.cos(this.gradosARadianes(ubicacion1.getLatitud())) * Math.cos(this.gradosARadianes(ubicacion2.getLatitud())) * 
+				Math.sin(distanciaEntreLongitudes/2) * Math.sin(distanciaEntreLongitudes/2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt( 1 - a ));
+		return radioDeLaTierraEnKM * c;
+	} else {
+		console.error('Se esperaban objetos del tipo ubicación como entradas');
+	}
 }
 MotorMatematico.prototype.gradosARadianes = function(grados) {
 	return grados * (Math.PI/180);

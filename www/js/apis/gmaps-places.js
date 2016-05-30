@@ -119,9 +119,9 @@ var google = {
 }
 
 google.maps.places.bdImprovisada = [
-   {place_id: '389274', nombre: 'Mc Donald', tipoPagina:'Restaurante de Comida Rápida', tipo: 'food', lat: -26.825653, lng: -65.203591},
+   {place_id: '389274', nombre: 'Mc Donalds', tipoPagina:'Restaurante de Comida Rápida', tipo: 'food', lat: -26.825653, lng: -65.203591},
    {place_id: '623526', nombre: 'La Pizzada', tipoPagina:'Pizzería' , tipo: 'food', lat: -26.830821, lng: -65.204742},
-   {place_id: '734634', nombre: 'Burguer King', tipoPagina:'Comida Rápida' , tipo: 'food', lat: -26.824049, lng: -65.202997},
+   {place_id: '734634', nombre: 'Burger King', tipoPagina:'Comida Rápida' , tipo: 'food', lat: -26.824049, lng: -65.202997},
    {place_id: '347346', nombre: 'Recorcholis', tipoPagina:'Discoteca' , tipo: 'night_club', lat: -26.813362, lng: -65.291265},
    {place_id: '345786', nombre: 'El Balón', tipoPagina:'Bar restaurante' , tipo: 'food', lat: -26.821314, lng: -65.199179},
    {place_id: '287456', nombre: 'Mil99', tipoPagina:'Bar restaurante' , tipo: 'food', lat: -26.816691, lng: -65.197985},

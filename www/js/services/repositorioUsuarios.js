@@ -143,6 +143,7 @@ function BaseDeDatosDeUsuarios() {
 	this.Usuarios[0].lugaresConMeGusta = [NEGOCIOS.RECORCHOLIS, NEGOCIOS.MCDONALD, NEGOCIOS.BURGER_KING];
 	this.Usuarios[1].lugaresConMeGusta = [NEGOCIOS.LA_PIZZADA, NEGOCIOS.VEA, NEGOCIOS.CARREFOUR];
 }
+
 BaseDeDatosDeUsuarios.prototype.getTodosLosUsuarios = function() {
 	return this.Usuarios;
 }

@@ -7,13 +7,15 @@ function Usuario(nombre, fechaNacimiento, sexo) {
 	this.lugaresQueLeGustan = []; //array de lugares
 }
 */
-function Usuario(nombre, sexo, fechaNac, ubicacion) {
+function Usuario(nombre, sexo, fechaNac) {
 	//this.id;
 	var fechaDeNacimiento = new Date(fechaNac);
 	this.nombre = nombre;
 	this.fechaDeNacimiento = fechaDeNacimiento;
 	this.sexo = sexo;
 	this.meGustanEnFB = [];
+	this.visitasALugaresEnElUltimoMes = [];
+	this.ultimaUbicacionConocida;
 }
 Usuario.prototype.setId = function(id) {
 	this.id = id;
