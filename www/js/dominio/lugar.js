@@ -18,3 +18,9 @@ Lugar.prototype.setRubro = function(rubro){
 		this.rubro = rubro;
 	}
 }
+Lugar.prototype.getNombre = function(){
+	return this.nombre;
+}
+Lugar.prototype.getMeGusta = function(){
+	return this.meGusta;
+}

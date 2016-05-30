@@ -1,8 +1,4 @@
 angular.module('starter')
-<<<<<<< HEAD:www/js/controllers/locationController.js
-	.controller('LocationController', ['googleMaps', '$rootScope', 'fuzzyControllerService', 'userService', '$stateParams', '$scope', 
-		function(googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
-=======
 	.controller('LocationController', [
 		CONSTANTES.NOMBRE_FACTORY_GPS, 
 		CONSTANTES.NOMBRE_FACTORY_PLACES,
@@ -39,22 +35,16 @@ angular.module('starter')
 			}
 
 			/*
->>>>>>> a4fd19787edb81305294209dda543f5ec0ebdc74:www/js/controladores/locationController.js
 			var lugarActual;
 			var ubicacionAnterior;
+			*/
 			var motorMatematico = new MotorMatematico();
-
 			var id = $stateParams.id;
 			$scope.user = userService.getUsuario(id);
 			console.log($scope.user);
+
 			actualizarUbicacion();
-<<<<<<< HEAD:www/js/controllers/locationController.js
 
-			//$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
-=======
-			*/
-
->>>>>>> a4fd19787edb81305294209dda543f5ec0ebdc74:www/js/controladores/locationController.js
 			function actualizarUbicacion(){
 				ubicacionAnterior = userService.getUltimaUbicacion();
 				//var nuevaUbicacion = googleMaps.getUbicacionActual();
@@ -68,7 +58,7 @@ angular.module('starter')
 					console.log('se movió');
 					lugarActual = googleMaps.getLugarActual(nuevaUbicacion);
 					lugaresCercanos = googleMaps.buscarLugaresCercanos(nuevaUbicacion);
-					var entradas = prepararEntradas(nuevaUbicacion, lugaresCercanos);
+					var entradas = prepararEntradas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos);
 
 					fuzzyControllerService.getPromocionesAOfrecer(entradas);
 					actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion);
@@ -77,17 +67,13 @@ angular.module('starter')
 					comprobarSiEsVisita(ubicacionAnterior, nuevaUbicacion);
 				}
 			}
-<<<<<<< HEAD:www/js/controllers/locationController.js
-			//);
-=======
->>>>>>> a4fd19787edb81305294209dda543f5ec0ebdc74:www/js/controladores/locationController.js
 
 			function compararUbicaciones(ubicacionAnterior, nuevaUbicacion){
 				var distancia = motorMatematico.calcularDistanciaEnKMEntreUbicaciones(ubicacionAnterior, nuevaUbicacion);
 				var distanciaEnMetros = motorMatematico.convertirKMaMetros(distancia);
 				console.log('distancia' + distanciaEnMetros);
 				if(distancia == 0){
-				return false;
+					return false;
 				} else return true;
 			}
 
@@ -105,30 +91,29 @@ angular.module('starter')
 				userService.actualizarUltimaUbicacion(nuevaUbicacion);
 			}
 
-			function prepararEntradas(ubicacion, lugaresCercanos){
+			function prepararEntradas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos){
 				var entradas = {};
 
-				entradas.nitidas = prepararEntradasNitidas();
-				entradas.aFusificar = prepararEntradasDifusas(ubicacion, lugaresCercanos);
+				prepararEntradasNitidas(lugaresCercanos);
+				entradas = prepararEntradasDifusas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos);
 
 				return entradas;
 			}
 
-			function prepararEntradasNitidas(){
-				//pedir datos del perfil
+			function prepararEntradasNitidas(lugaresCercanos){
+				agregarMeGustaALugares(lugaresCercanos);
 			}
 
-			function prepararEntradasDifusas(ubicacion, lugaresCercanos){
-				var entradasDifusas = {};
+			function prepararEntradasDifusas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos){
+				var entradas = {};
 
-				agregarDistanciasALugaresCercanos(ubicacion, lugaresCercanos); 
+				agregarDistanciasALugaresCercanos(nuevaUbicacion, lugaresCercanos); 
 				agregarVisitasMensualesALugares(lugaresCercanos);
-				agregarMeGustaALugares(lugaresCercanos);
 
-				entradasDifusas.lugares = lugaresCercanos;
-				entradasDifusas.velocidadDeMovimiento = calcularVelocidadDeMovimiento(ubicacion); // Es una sola variable
+				entradas.lugares = lugaresCercanos;
+				entradas.velocidadDeMovimiento = calcularVelocidadDeMovimiento(nuevaUbicacion, ubicacionAnterior); // Es una sola variable
 
-				return entradasDifusas;
+				return entradas;
 			}
 
 			function agregarDistanciasALugaresCercanos(ubicacion, lugaresCercanos) {
@@ -153,7 +138,6 @@ angular.module('starter')
 					for (var i = 0; i < lugaresCercanos.length; i++) {
 						var lugar = lugaresCercanos[i];
 						if(meGustas[j] == lugar.nombre){
-							console.log('holix');
 							lugar.meGusta = true;
 						}
 					}
@@ -161,15 +145,20 @@ angular.module('starter')
 			}
 
 			function calcularVisitasMensualesAlLugar(lugar){
-				return 6;
+				return userService.getVisitasALugar(id, lugar);
 			}
 
 			function calcularDistanciaAlLugarCercano(ubicacion, ubicacionLugar){
-				return 55;
+				var distanciaEnKM = motorMatematico.calcularDistanciaEnKMEntreUbicaciones(ubicacion, ubicacionLugar);
+				var distanciaEnMetros = motorMatematico.convertirKMaMetros(distanciaEnKM)
+				return distanciaEnMetros;
 			}
 
-			function calcularVelocidadDeMovimiento(ubicacion) {			
-				return 1;
+			function calcularVelocidadDeMovimiento(nuevaUbicacion, ubicacionAnterior) {
+				//ni idea si esta bien hecha la funcion jeje
+				var velocidad = motorMatematico.calcularVelocidadDeMovimiento(nuevaUbicacion, ubicacionAnterior);
+				console.log(velocidad);
+				return velocidad;
 			}
 
 		}]);

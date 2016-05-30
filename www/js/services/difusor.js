@@ -44,7 +44,7 @@ function calcularProbabilidadesDeDistancia(lugares){
 		var probMuyCorta = new Trapezoide(0, 0, 50, 60).calculateIntersection(lugar.distancia);
 		var probCorta = new Trapezoide(40,60,180,250).calculateIntersection(lugar.distancia);
 		var probMedia = new Trapezoide(150, 200, 500, 600).calculateIntersection(lugar.distancia);
-		var probGrande = new Trapezoide(500, 650, 1000, 1000).calculateIntersection(lugar.distancia);
+		var probGrande = new Trapezoide(500, 650, 10000, 10000).calculateIntersection(lugar.distancia);
 
 		var nombreDeLugar = lugar.nombre;
 		distanciasALugar.push({
@@ -66,7 +66,7 @@ function calcularProbabilidadesDeDistancia(lugares){
 
 function calcularProbabilidadesDeMovilidad(velocidad){
 	var probLento = new Trapezoide(0, 0, 0.6, 1.1).calculateIntersection(velocidad);
-	var probRapido = new Trapezoide(0.6, 1.1, 10, 10).calculateIntersection(velocidad);
+	var probRapido = new Trapezoide(0.6, 1.1, 20, 20).calculateIntersection(velocidad);
 
 	var movilidad = {probabilidades: {
 		lento: probLento,

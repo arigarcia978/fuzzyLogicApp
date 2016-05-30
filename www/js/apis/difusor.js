@@ -31,7 +31,11 @@ Trapezoide.prototype.calculateIntersection = function(value) {
     if (x < this.a) {
         result = 0;
     } else if (x > this.d) {
-        result = 0;
+        if(this.c == this.d) {
+            result = 1;
+        } else{
+            result = 0;
+        }
     } else if ((x >= this.b) && (x <= this.c)) {
         result = 1;
     } else if ((x >= this.a) && (x < this.b)) {

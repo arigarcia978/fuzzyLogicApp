@@ -14,8 +14,6 @@ var baseDeDatos = {
    }
 }
 
-
-
 var SEXO = {
    MASCULINO: 'Masculino',
    FEMENINO: 'Femenino'

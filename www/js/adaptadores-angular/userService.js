@@ -17,6 +17,9 @@ angular.module('starter')
 	    	},
 	    	getMeGustasDeUsuario: function(id){
 	    		return repositorioUsuarios.getLugaresConMeGusta(id);
+	    	},
+	    	getVisitasALugar: function(id, lugar){
+	    		return repositorioUsuarios.visitasAUnLugar(id, lugar);
 	    	}
 	  	}
 	}]);
