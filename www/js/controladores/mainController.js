@@ -1,7 +1,7 @@
 angular.module('starter')
 	.controller('MainController', ['$rootScope', '$scope','googleMaps',  
 		function($rootScope, $scope, googleMaps){
-			/*
+		/*
 		//setInterval(getUbicacion, 5000);
 
 		function getUbicacion(){
