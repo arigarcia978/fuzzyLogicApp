@@ -163,7 +163,7 @@ angular.module('starter')
 			function calcularVelocidadDeMovimiento(nuevaUbicacion, ubicacionAnterior) {
 				//ni idea si esta bien hecha la funcion jeje
 				var velocidad = motorMatematico.calcularVelocidadDeMovimiento(nuevaUbicacion, ubicacionAnterior);
-				console.log(velocidad);
+				console.log('velocidad:'+velocidad);
 				return velocidad;
 			}
 

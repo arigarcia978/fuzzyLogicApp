@@ -30,6 +30,7 @@ var NEGOCIOS = {
 	VEA: 'Vea',
 	CARREFOUR: 'Carrefour'
 }
+*/
 
 function AdaptadorGoogleMaps() {
 	//this.BDLugares = {};
