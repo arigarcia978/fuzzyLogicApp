@@ -3,6 +3,7 @@ function Difusor(){}
 Difusor.prototype.fusificar = function(entradas){
 	var entradasDifusas = {};
 
+	console.log(entradas);
 	entradasDifusas.frecuenciaDeLugares = calcularProbabilidadesDeFrecuencia(entradas.lugares);
 	entradasDifusas.distanciasACadaLugar = calcularProbabilidadesDeDistancia(entradas.lugares);
 	entradasDifusas.movilidad = calcularProbabilidadesDeMovilidad(entradas.velocidadDeMovimiento);

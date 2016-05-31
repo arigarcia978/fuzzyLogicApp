@@ -41,6 +41,7 @@ angular.module('starter')
 			var ubicacionAnterior;
 			*/
 			var motorMatematico = new MotorMatematico();
+
 			var id = $stateParams.id;
 			$scope.user = userService.getUsuario(id);
 			console.log($scope.user);
