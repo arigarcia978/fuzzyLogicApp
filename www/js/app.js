@@ -51,6 +51,7 @@ angular.module('starter', ['ionic'])
     }
   })
 
+
   .state('tab.profile', {
       url: '/profile/:id',
       views: {
