@@ -1,5 +1,15 @@
-<ion-view view-title="Perfil">
+<ion-view view-title="Iniciar Sesion">
   <ion-content class="padding">
-    <h2>Perfil de la persona {{ubicacion.latitud}}</h2>
+  		
+  		<img src="img/logo.jpg" alt="">
+     <div class="list">
+      <div class="item item-divider item-assertive">
+	    Lista de Usuarios
+	  </div>
+		<a class="item item-thumbnail-left" ng-href ='#/tab/profile/{{user.id}}' ng-repeat= "user in users">
+			<img src="img/{{user.id}}.png"> <!-- img Usuario -->
+			<h2>{{user.nombre}}</h2> <!-- Usuario.Nombre -->
+		</a>
+	</div>
   </ion-content>
 </ion-view>

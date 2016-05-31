@@ -28,7 +28,6 @@ angular.module('starter')
 				});
 			}
 
-
 			function mostrarUbicacionYLugares() {
 				console.log('Entro...');
 				console.log(ubicacionActual);
@@ -44,10 +43,11 @@ angular.module('starter')
 
 			var id = $stateParams.id;
 			$scope.user = userService.getUsuario(id);
+			var user= $scope.user;
+			$scope.edad = motorMatematico.calcularEdad(user.fechaN);
 			console.log($scope.user);
 
 			actualizarUbicacion();
-
 
 			//$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
 			function actualizarUbicacion(){
@@ -65,7 +65,7 @@ angular.module('starter')
 					lugaresCercanos = googleMaps.buscarLugaresCercanos(nuevaUbicacion);
 					var entradas = prepararEntradas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos);
 
-					fuzzyControllerService.getPromocionesAOfrecer(entradas);
+					$scope.promocion = fuzzyControllerService.getPromocionesAOfrecer(entradas);
 					actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion);
 				} else {
 					console.log('no se movio');
