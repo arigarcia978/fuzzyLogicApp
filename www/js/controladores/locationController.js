@@ -66,6 +66,7 @@ angular.module('starter')
 					var entradas = prepararEntradas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos);
 
 					$scope.promocion = fuzzyControllerService.getPromocionesAOfrecer(entradas);
+					console.log($scope.promocion);
 					actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion);
 				} else {
 					console.log('no se movio');

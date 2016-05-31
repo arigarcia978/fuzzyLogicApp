@@ -1,9 +1,10 @@
 angular.module('starter')
-	.factory('fuzzyControllerService', [function(){
+	.factory('fuzzyControllerService', ['addsService', function(addsService){
 	  return {
 	    getPromocionesAOfrecer: function(entradas){
 	    	var controladorDifuso = new ControladorDifuso();
-	      	return controladorDifuso.seleccionarPromociones(entradas);
+	    	var lugarElegido = controladorDifuso.seleccionarPromociones(entradas);
+	      	return addsService.getPromocionAMostrar(lugarElegido);
 	    }
 	  }
 	}]);
