@@ -114,6 +114,7 @@ angular.module('starter')
 
 				agregarDistanciasALugaresCercanos(nuevaUbicacion, lugaresCercanos); 
 				agregarVisitasMensualesALugares(lugaresCercanos);
+				agregarMeGustaALugares(lugaresCercanos);
 
 				entradas.lugares = lugaresCercanos;
 				entradas.velocidadDeMovimiento = calcularVelocidadDeMovimiento(nuevaUbicacion, ubicacionAnterior); // Es una sola variable
