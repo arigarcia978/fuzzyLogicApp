@@ -151,9 +151,9 @@ BaseDeDatos.prototype.getTabla = function(nombreTabla, callback, arrayColumnas) 
       callback([]);
    }
 }
-BaseDeDatos.prototype.getFila = function(nombreTabla, nombreColumna, valor, arrayColumnas, callback) {
-   var columnasFiltro;
-   if (arrayConElementos(arrayColumnas)) {
+BaseDeDatos.prototype.getFila = function(nombreTabla, nombreColumna, valor, callback, arrayColumnas) {
+   var columnasFiltro = [];
+   if (existeLaVariable(arrayColumnas, true)) {
       columnasFiltro = arrayCombinarElementosUnicos(arrayColumnas, nombreColumna);
    }
    this.getTabla(nombreTabla, function(datosTabla) {

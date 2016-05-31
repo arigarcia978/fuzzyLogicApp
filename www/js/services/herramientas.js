@@ -1,5 +1,11 @@
 var global;
 
+var log = {
+   seEsperabaUn: function(obj, metodo, clase) {
+      console.error('Se esperaba un objeto ' + obj + ' para el metodo ' + metodo + ' de la clase ' + clase);
+   }
+}
+
 function objetoVacio(objeto) {
 
    if (objeto == null) {
@@ -79,8 +85,12 @@ function existeLaVariable(variable, controlarContenido) {
 function esUnaInstancia(elemento, objeto) {
    return (elemento instanceof objeto);
 }
-function esUnArray(elemento) {
-   return esUnaInstancia(elemento, Array);
+function esUnArray(posibleArray) {
+   return esUnaInstancia(posibleArray, Array);
+}
+
+function esUnaFecha(posibleFecha) {
+   return esUnaInstancia(posibleFecha, Date);
 }
 
 function formatearFecha(fecha, tipo) {
