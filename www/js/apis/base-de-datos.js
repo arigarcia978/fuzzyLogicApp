@@ -23,8 +23,23 @@ var NEGOCIOS = {
    EL_ATENEO: 'El Ateneo',
    LANCASTER: 'Lancaster',
    RECORCHOLIS: 'Recorcholis'
+
+/*
+var baseDeDatos = {
+   sexo: {
+      MASCULINO: 'Masculino',
+      FEMENINO: 'Femenino',
+   },
+   usuarios: {
+
+   }
 }
 
+var SEXO = {
+   MASCULINO: 'Masculino',
+   FEMENINO: 'Femenino'
+}
+*/
 function BaseDeDatos() {
    var bd = this;
    this.constantes = {

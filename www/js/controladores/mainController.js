@@ -1,6 +1,7 @@
 angular.module('starter')
 	.controller('MainController', ['$rootScope', '$scope','googleMaps',  
 		function($rootScope, $scope, googleMaps){
+		
 		/*
 		//setInterval(getUbicacion, 5000);
 
@@ -12,5 +13,5 @@ angular.module('starter')
 			$scope.ubicacion = googleMaps.getUbicacionActual(); //del gps o googlemaps
 			$rootScope.$emit("actualizarUbicacion");
 		}
-
+	*/
 	}]);
