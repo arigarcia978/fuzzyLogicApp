@@ -48,7 +48,6 @@ AdaptadorGooglePlaces.prototype.buscarNegocio = function(placeId, callback) {
    var datos = {
       placeId: placeId
    };
-
    this.apiPlaces.getDetails(datos, function(lugar, estado) {
       if (estado == google.maps.places.PlacesServiceStatus.OK) {
          callback(lugar);

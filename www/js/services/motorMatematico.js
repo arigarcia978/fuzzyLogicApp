@@ -3,7 +3,7 @@ function MotorMatematico() {
 }
 
 MotorMatematico.prototype.calcularEdad = function(fecha) {
-	var edadEnMilisegundos = Date.now() - fecha.getTime();
+	var edadEnMilisegundos = Date.now() - (esUnaFecha(fecha) ? fecha.getTime() : new Date(fecha).getTime());
 	var edad = new Date(edadEnMilisegundos);
 	return Math.abs(edad.getUTCFullYear() - 1970);
 }

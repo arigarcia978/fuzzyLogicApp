@@ -8,7 +8,6 @@ function Usuario(nombre, fechaNacimiento, sexo) {
 }
 */
 function Usuario(nombre, sexo, fechaNac) {
-	//this.id;
 	var fechaDeNacimiento = new Date(fechaNac);
 	this.nombre = nombre;
 	this.fechaDeNacimiento = fechaDeNacimiento;
@@ -20,31 +19,37 @@ function Usuario(nombre, sexo, fechaNac) {
 Usuario.prototype.setId = function(id) {
 	this.id = id;
 }
-Usuario.prototype.getNombre = function() {
-	return this.nombre;
-}
-Usuario.prototype.getFechaDeNacimiento = function() {
-	return this.fechaDeNacimiento;
-}
-Usuario.prototype.getEdad = function() {
-	return matematica.calcularEdad(fechaDeNacimiento);			//TODO: Calcular en base a la fechaNac
-}
-Usuario.prototype.getSexo = function() {
-	return this.sexo;
-}
-Usuario.prototype.agregarMeGustaEnFB = function(meGusta) {
-	if (meGusta instanceof MeGustaEnFB) {
-		this.meGustanEnFB.push(meGusta);
+Usuario.prototype.actualizarUbicacion = function(ubicacion) {
+	if (esUnaInstancia(ubicacion, Ubicacion)) {
+		this.ultimaUbicacionConocida = ubicacion;
+	} else {
+		log.seEsperabaUn('Ubicacion', 'actualizarUbicacion', 'Usuario');
 	}
+}
+Usuario.prototype.agregarMeGustaDelFB = function(meGusta) {
+	/*if (meGusta instanceof MeGustaEnFB) {
+		this.meGustanEnFB.push(meGusta);
+	}*/
+	this.meGustanEnFB.push(meGusta);
 }
 Usuario.prototype.agregarCosasQueLeGustanEnFB = function(lista) {
-	for (var i = 0; i < lista.length; i++) {
-		this.agregarMeGustaEnFB(lista[i]);
+	var clase = this;
+	if (esUnArray(lista)) {
+		lista.forEach(function (meGusta) {
+			clase.agregarMeGustaDelFB(meGusta);
+		});
+	} else {
+		log.seEsperabaUn('Array', 'agregarCosasQueLeGustanEnFB', 'Usuario');
 	}
+}
+
+Usuario.prototype.getNombre = function() {return this.nombre;}
+Usuario.prototype.getFechaDeNacimiento = function() {return this.fechaDeNacimiento;}
+Usuario.prototype.getSexo = function() {return this.sexo;}
+Usuario.prototype.getMeGustanEnFB = function() {return this.meGustanEnFB;}
+Usuario.prototype.getEdad = function() {
+	return motorMatematico.calcularEdad(this.fechaDeNacimiento);
 }
 Usuario.prototype.agregarBaseDeConocimiento = function(baseDeConocimiento) {
 	this.baseDeConocimiento = baseDeConocimiento;
-}
-Usuario.prototype.getMeGustanEnFB = function() {
-	return this.meGustanEnFB;
 }

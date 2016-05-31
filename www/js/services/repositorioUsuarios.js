@@ -1,9 +1,11 @@
+/*
 var SEXO = {
 	MASCULINO: 'Masculino',
 	FEMENINO: 'Femenino'
 }
-
+*/
 function BaseDeDatosDeUsuarios() {
+	var SEXO = new BaseDeDatos().constantes.sexo;
 	this.Usuarios = [
 		{id: "123", nombre: "Leandro", sexo: SEXO.MASCULINO, src:"", fechaN: '11/27/1992', visitas: [], lugaresConMeGusta: []}, 
 		{id: "212", nombre: "Ariana", sexo: SEXO.FEMENINO, src:"", fechaN: '12/07/1993', visitas: [], lugaresConMeGusta: []}
@@ -173,3 +175,33 @@ BaseDeDatosDeUsuarios.prototype.visitasAUnLugar = function(id, lugar){
 	}
 	return contador;
 }
+
+
+function RepositorioUsuarios() {
+	this.bd = new AdaptadorBaseDeDatos();
+	this.CONSTANTES = {
+		TIEMPO: {
+			MES: 'mes'
+		}
+	}
+}
+//Todo esto es en realidad el repositorio de Usuarios.
+RepositorioUsuarios.prototype.getTodosLosUsuarios = function(callback) {
+   this.bd.getObjetos(this.bd.CONSTANTES.OBJETO.USUARIO, function(usuarios) {
+      callback(usuarios);
+   });
+};
+RepositorioUsuarios.prototype.getUsuarioPorId = function(id, callback) {
+   this.bd.getObjeto(this.bd.CONSTANTES.OBJETO.USUARIO, id, function(usuario) {
+      callback(usuario);
+   });
+}
+//Ver qué mierda con este método, qué quiero
+RepositorioUsuarios.prototype.getVisitasDeUsuarioAUnLugar = function(usuario, lugar) {
+	if (esUnaInstancia(usuario, Usuario) && esUnaInstancia(lugar, Lugar)) {
+
+	}
+}
+RepositorioUsuarios.prototype.guardarUsuario = function(usuario) {
+   //TODO.... Recordar comprobar es un objeto Usuario primero.
+};
