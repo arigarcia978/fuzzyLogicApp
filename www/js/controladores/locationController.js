@@ -45,6 +45,7 @@ angular.module('starter')
 			var id = $stateParams.id;
 			$scope.user = userService.getUsuario(id);
 			console.log($scope.user);
+
 			actualizarUbicacion();
 
 
