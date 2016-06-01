@@ -8,14 +8,16 @@ angular.module('starter')
 		'userService', 
 		'$stateParams', 
 		'$scope', 
-		function(servicioGPS, servicioGooglePlaces, googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope){
+		'addsService',
+		function(servicioGPS, servicioGooglePlaces, googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope, servicioPromocion){
 			
+			console.log('LEANDRO ES UN CURIOSO');
+
 			var ubicacionActual, lugaresCercanos;
 			
 			cargarInformacionDiferida(function(ubicacion, lugares) {
 				ubicacionActual = ubicacion;
 				lugaresCercanos = lugares;
-
 				
 			});
 
@@ -48,30 +50,35 @@ angular.module('starter')
 			console.log($scope.user);
 
 			actualizarUbicacion();
+			$scope.promocion = 'Titulo: vacio'
 
 			//$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
 			function actualizarUbicacion(){
-				ubicacionAnterior = userService.getUltimaUbicacion();
+				//ubicacionAnterior = userService.getUltimaUbicacion();
+				var ubicacionAnterior = new Ubicacion(41.50338, 2.17403, new Date(2016, 5, 24, 16, 40, 0, 0));
+				servicioGPS.getUbicacionActual(function(nuevaUbicacion) {
+				console.log(ubicacionAnterior);
+				console.log(nuevaUbicacion);
 				//var nuevaUbicacion = googleMaps.getUbicacionActual();
-				var nuevaUbicacion = new Ubicacion(41.50338, 2.17403, new Date(2016, 5, 24, 16, 40, 0, 0));
+				$scope.ubicacionNueva = nuevaUbicacion;
 				var lugaresCercanos;										//Array de lugar (Del dominio)
-
 				var seMovió = compararUbicaciones(ubicacionAnterior, nuevaUbicacion);
-
 				//arreglar?
 				if(seMovió) {
 					console.log('se movió');
 					lugarActual = googleMaps.getLugarActual(nuevaUbicacion);
 					lugaresCercanos = googleMaps.buscarLugaresCercanos(nuevaUbicacion);
 					var entradas = prepararEntradas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos);
-
-					$scope.promocion = fuzzyControllerService.getPromocionesAOfrecer(entradas);
-					console.log($scope.promocion);
+					var lugarElegido = fuzzyControllerService.getPromocionesAOfrecer(entradas);
+					servicioPromocion.setLugar(lugarElegido);
+					//$scope.promocion = fuzzyControllerService.getPromocionesAOfrecer(entradas);
+					//console.log('promocion' + $scope.promocion);
 					actualizarUltimaUbicacion(ubicacionAnterior, nuevaUbicacion);
 				} else {
 					console.log('no se movio');
 					comprobarSiEsVisita(ubicacionAnterior, nuevaUbicacion);
 				}
+				});
 			}
 
 			function compararUbicaciones(ubicacionAnterior, nuevaUbicacion){

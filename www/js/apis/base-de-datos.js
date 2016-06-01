@@ -142,7 +142,7 @@ datos: [{
             }
          }],
          lugaresConMeGusta: [
-            NEGOCIOS.LANCASTER, NEGOCIOS.ATLAS, NEGOCIOS.CARREFOUR
+            NEGOCIOS.RECORCHOLIS, NEGOCIOS.MCDONALD, NEGOCIOS.BURGER_KING, NEGOCIOS.LA_PIZZADA
          ]
       },{
          id: "1123",

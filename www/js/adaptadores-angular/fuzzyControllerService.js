@@ -4,7 +4,9 @@ angular.module('starter')
 	    getPromocionesAOfrecer: function(entradas){
 	    	var controladorDifuso = new ControladorDifuso();
 	    	var lugarElegido = controladorDifuso.seleccionarPromociones(entradas);
-	      	return addsService.getPromocionAMostrar(lugarElegido);
+	    	console.log('fuzzy ' + lugarElegido)
+	      	return lugarElegido;
+	      	//return addsService.getPromocionAMostrar(lugarElegido);
 	    }
 	  }
 	}]);

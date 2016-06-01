@@ -1,12 +1,15 @@
 function AdaptadorPromociones(){
 	this.promociones = {};
+	//agregar id y fotos a promociones
 	this.promociones[NEGOCIOS.BURGER_KING] = [
-		{"Titulo":"Combo Stacker","Descripcion":"Combo Stacker de 20 hamburguesas a $300"},
-		{"Titulo":"Rockles","Descripcion":"Helado Rockles a $45"}
+		{"Id":"1","Titulo":"Combo Stacker","Descripcion":"Combo Stacker de 20 hamburguesas a $300"},
+		{"Id":"2","Titulo":"Rockles","Descripcion":"Helado Rockles a $45"}
 	];
-	this.promociones[NEGOCIOS.LA_PIZZADA] = [];
+	this.promociones[NEGOCIOS.LA_PIZZADA] = [
+		{"Id":"3","Titulo":"Promo Pizzas Locas","Descripcion":"Comprando 3 pizzas Especiales pagas solo 2"}
+	];
 	this.promociones[NEGOCIOS.MCDONALD] = [
-		{"Titulo":"Promo Big Mac","Descripcion":"Combo Big Mac con queso a $120"},
+		{"Id":"4","Titulo":"Promo Big Mac","Descripcion":"Combo Big Mac con queso a $120"},
 		{"Titulo":"McFlurry","Descripcion":"Descuento de 25% con la compra de un combo Cuarto de Libra"}
 	];
 	this.promociones[NEGOCIOS.MIL99] = [
@@ -24,8 +27,7 @@ function AdaptadorPromociones(){
 	];
 	this.promociones[NEGOCIOS.ATLAS] = [
 		{"Titulo":"Jueves-Viernes-Sabado-Domingo-Lunes y Martes","Descripcion":" 2D: 2 x $ 160 / 3D: 2 x $ 180"},
-		{"Titulo":"Miercoles","Descripcion":"2D: $ 45 / 3D: $ 50"},
-		{"Titulo":"CLUB LA GACETA y CLUB  PERSONAL","Descripcion":"2×1 en 3D  VIERNES  y MARTES y en 2D JUEVES-VIERNES-SABADO-DOMINGO-LUNES y MARTES  (NO VALE EN FUNCIONES TRASNOCHE) *SOLO ES VALIDA PRESENTADA POR EL TITULAR CON DNI . *SOLO VALE UNA PROMO POR TITULAR Y POR DIA"}
+		{"Titulo":"Miercoles","Descripcion":"2D: $ 45 / 3D: $ 50"}
 	];
 	this.promociones[NEGOCIOS.EL_ATENEO] = [
 		{"Titulo":"Promociones","Descripcion": "%20 de Descuento en la compra de toda la Saga Canción de Hielo y Fuego"}
@@ -43,3 +45,4 @@ AdaptadorPromociones.prototype.getPromocion = function(lugar){
 	var promociones = this.promociones[lugar];
 	return promociones[0];
 }
+
