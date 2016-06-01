@@ -13,21 +13,36 @@ angular.module('starter')
 			
 			console.log('LEANDRO ES UN CURIOSO');
 
-			var ubicacionActual, lugaresCercanos;
+			var ubicacionActual, lugaresCercanos, usuarioActual;
 			
-			cargarInformacionDiferida(function(ubicacion, lugares) {
-				ubicacionActual = ubicacion;
-				lugaresCercanos = lugares;
-				
+			cargarInformacionDiferida(function() {
+				actualizarUbicacion();
 			});
 
 			function cargarInformacionDiferida(callback) {
+				var cargados = 0;
 				servicioGPS.getUbicacionActual(function(ubicacion) {
 					servicioGooglePlaces.buscarLugaresCercanos(ubicacion, 'food', function(lugares) {
 						//Los lugares vienen ordenados del mas cerca al mas lejos
-						callback(ubicacion, lugares);
+						ubicacionActual = ubicacion;
+						lugaresCercanos = lugares;
+						cargados++;
+						cargados++;
 					});
 				});
+
+				var id = $stateParams.id;
+				userService.getUsuario(id, function(usuario){
+					$scope.user = usuario;
+					usuarioActual = usuario;
+					cargados++;
+				});
+
+				if (cargados === 3) {
+					callback();
+				}
+
+
 			}
 
 			function mostrarUbicacionYLugares() {
@@ -41,24 +56,21 @@ angular.module('starter')
 			var lugarActual;
 			var ubicacionAnterior;
 			*/
-			var motorMatematico = new MotorMatematico();
 
-			var id = $stateParams.id;
-			$scope.user = userService.getUsuario(id);
-			var user= $scope.user;
 			$scope.edad = motorMatematico.calcularEdad(user.fechaN);
-			console.log($scope.user);
-
-			actualizarUbicacion();
+			
+			//actualizarUbicacion();
 			$scope.promocion = 'Titulo: vacio'
 
 			//$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
 			function actualizarUbicacion(){
+				console.log(ubicacionActual);
 				//ubicacionAnterior = userService.getUltimaUbicacion();
 				var ubicacionAnterior = new Ubicacion(-26.8308402, -65.2051408, new Date(2016, 5, 24, 16, 40, 0, 0));
 				servicioGPS.getUbicacionActual(function(nuevaUbicacion) {
 				console.log(ubicacionAnterior);
 				console.log(nuevaUbicacion);
+				console.log($scope.user);
 				//var nuevaUbicacion = googleMaps.getUbicacionActual();
 				$scope.ubicacionNueva = nuevaUbicacion;
 				var lugaresCercanos;										//Array de lugar (Del dominio)
@@ -146,8 +158,8 @@ angular.module('starter')
 			}
 
 			function agregarMeGustaALugares(lugaresCercanos){
-				var meGustas = userService.getMeGustasDeUsuario(id);
-				
+				var meGustas = usuarioActual.getMeGustanEnFB();
+				console.log(meGustas);
 				for(var j = 0; j < meGustas.length; j++){
 					for (var i = 0; i < lugaresCercanos.length; i++) {
 						var lugar = lugaresCercanos[i];
@@ -159,7 +171,7 @@ angular.module('starter')
 			}
 
 			function calcularVisitasMensualesAlLugar(lugar){
-				return userService.getVisitasALugar(id, lugar);
+				return userService.getVisitasALugar(usuarioActual, lugar);
 			}
 
 			function calcularDistanciaAlLugarCercano(ubicacion, ubicacionLugar){

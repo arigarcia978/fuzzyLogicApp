@@ -15,11 +15,8 @@ angular.module('starter')
 	    		repositorioUsuarios.getTodosLosUsuarios(function(datos){ usuarios = datos; });
 	    		return usuarios;
 	    	},
-	    	getUsuario: function(id){
-	    		return repositorioUsuarios.getUsuarioPorId(id, function(datos){ return datos; });
-	    	},
-	    	getMeGustasDeUsuario: function(id){
-	    		return repositorioUsuarios.getLugaresConMeGusta(id);
+	    	getUsuario: function(id, callback){
+	    		return repositorioUsuarios.getUsuarioPorId(id, callback);
 	    	},
 	    	getVisitasALugar: function(id, lugar){
 	    		return repositorioUsuarios.visitasAUnLugar(id, lugar);

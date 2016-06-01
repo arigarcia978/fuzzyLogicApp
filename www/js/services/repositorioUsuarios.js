@@ -194,13 +194,13 @@ RepositorioUsuarios.prototype.getTodosLosUsuarios = function(callback) {
 };
 RepositorioUsuarios.prototype.getUsuarioPorId = function(id, callback) {
    this.bd.getObjeto(this.nombreObjetoPreferido, id, function(usuario) {
-      callback(usuario);
+   		callback(usuario);
    });
 }
 //Ver qué mierda con este método, qué quiero
 RepositorioUsuarios.prototype.getVisitasDeUsuarioAUnLugar = function(usuario, lugar) {
 	if (esUnaInstancia(usuario, Usuario) && esUnaInstancia(lugar, Lugar)) {
-
+		
 	}
 }
 RepositorioUsuarios.prototype.guardarUsuario = function(usuario) {
