@@ -56,26 +56,24 @@ function BaseDeDatos() {
       nombreTabla: bd.constantes.TABLAS.USUARIOS,
       //La ubicacion en las visitas ver qué onda....
       //El place id lo puse por si se quieren detalles
-      datos: [{
-         id: "123",
-         nombre: "Leandro",
+      
+datos: [{
+         id: "1121",
+         nombre: "Matias",
          sexo: bd.constantes.sexo.MASCULINO,
-         fechaN: '11/27/1992',
+         fechaN: '11/04/1993',
          urlImagenDePerfil:"",
          ultimaUbicacionConocida: {
-            fecha: "05/29/2016 07:03:01",
-            latitud: -26.817087,
-            longitud: -65.198544
+            //Santiago y muñecas
+            fecha: "05/31/2016 11:15:04",
+            latitud: -26.823910,
+            longitud: -65.204414
          },
          visitas: [{
             historial: [
-               "05/27/2016 21:37:09",
-               "05/21/2016 22:43:51",
-               "05/20/2016 23:12:24",
-               "05/15/2016 02:37:06",
-               "05/13/2016 22:44:31",
-               "05/07/2016 23:52:17",
-               "05/07/2016 01:04:47"
+               "04/29/2016 23:59:09",
+               "05/06/2016 22:43:51",
+               "05/13/2016 23:12:24"
             ],
             lugar: {
                place_id: '',
@@ -88,6 +86,7 @@ function BaseDeDatos() {
          },{
             historial: [
                "05/15/2016 22:37:25",
+               "05/20/2016 22:23:34"
             ],
             lugar: {
                place_id: '',
@@ -99,29 +98,43 @@ function BaseDeDatos() {
             }
          }],
          lugaresConMeGusta: [
-            NEGOCIOS.LA_PIZZADA, NEGOCIOS.VEA, NEGOCIOS.CARREFOUR
+            NEGOCIOS.RECORCHOLIS, NEGOCIOS.VEA, NEGOCIOS.CARREFOUR
          ]
       },{
-         id: "212",
+         id: "1122",
          nombre: "Ariana",
          sexo: bd.constantes.sexo.FEMENINO,
          fechaN: '12/07/1993',
          urlImagenDePerfil:"",
          ultimaUbicacionConocida: {
-            fecha: '05/28/2016',
-            latitud: -26.822861,
-            longitud: -65.199878
+            //San Juan y Virgen de la Merced
+            fecha: "05/30/2016 16:30:00",
+            latitud: -26.826225,
+            longitud: -65.200443
          },
          visitas: [{
             historial: [
-               "05/28/2016 21:36:03",
-               "05/20/2016 23:12:28",
-               "05/13/2016 23:15:13",
-               "05/04/2016 20:42:46"
+               "04/09/2016 11:03:09",
+               "04/13/2016 09:43:51",
+               "04/15/2016 21:12:24",
+               "04/22/2016 20:21:24"
             ],
             lugar: {
                place_id: '',
-               nombre: NEGOCIOS.MCDONALD,
+               nombre: NEGOCIOS.CARREFOUR,
+               ubicacion: {
+                  latitud: "23.56589209",
+                  longitud: "54.12198742"
+               }
+            }
+         },{
+            historial: [
+               "05/12/2016 22:00:25",
+               "05/19/2016 22:00:34",
+            ],
+            lugar: {
+               place_id: '',
+               nombre: NEGOCIOS.ATLAS,
                ubicacion: {
                   latitud: "23.56589209",
                   longitud: "54.12198742"
@@ -131,12 +144,52 @@ function BaseDeDatos() {
          lugaresConMeGusta: [
             NEGOCIOS.RECORCHOLIS, NEGOCIOS.MCDONALD, NEGOCIOS.BURGER_KING, NEGOCIOS.LA_PIZZADA
          ]
-      }]
-   },{
+      },{
+         id: "1123",
+         nombre: "Franco",
+         sexo: bd.constantes.sexo.MASCULINO,
+         fechaN: '09/23/1992',
+         urlImagenDePerfil:"",
+         ultimaUbicacionConocida: {
+            //Virgen de la Merced y Sarmiento.
+            fecha: "05/29/2016 18:22:00",
+            latitud: -26.819201, 
+            longitud: -65.198844
+         },
+         visitas: [{
+            historial: [
+               "05/23/2016 12:30:09",
+               "05/25/2016 13:43:51",
+            ],
+            lugar: {
+               place_id: '',
+               nombre: NEGOCIOS.MIL99,
+               ubicacion: {
+                  latitud: "23.56589209",
+                  longitud: "54.12198742"
+               }
+            }
+         },{
+            historial: [
+               "05/12/2016 22:00:25",
+            ],
+            lugar: {
+               place_id: '',
+               nombre: NEGOCIOS.BURGER_KING,
+               ubicacion: {
+                  latitud: "23.56589209",
+                  longitud: "54.12198742"
+               }
+            }
+         }],
+         lugaresConMeGusta: [
+            NEGOCIOS.EL_BALON, NEGOCIOS.ATLAS, NEGOCIOS.MIL99
+         ]
+      },{
       nombreTabla: 'Pensar uno',
       datos: {}
-   }];
-}
+   }]}];}
+
 BaseDeDatos.prototype.seleccionarColumnas = function(tabla, columnasASeleccionar) {
    var datos = tabla.map(function(fila) {
       var nuevaFila = {};

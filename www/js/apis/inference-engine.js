@@ -16,11 +16,12 @@ InferenceEngine.prototype.set = function(nombre, valor){
 	}
 }
 InferenceEngine.prototype.addRule = function(nombre, funcion){
-	this.reglas[nombre] = funcion();
+	this.reglas[nombre] = new Function(funcion);
 }
 InferenceEngine.prototype.infer = function(){
+	console.log('Infiriendo...');
 	for(regla in this.reglas) {
-		this.reglas[regla]
+		this.reglas[regla].apply(this);
 	}
 }
 InferenceEngine.prototype.getResultados = function(){
