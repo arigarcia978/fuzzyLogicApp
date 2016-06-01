@@ -198,9 +198,19 @@ RepositorioUsuarios.prototype.getUsuarioPorId = function(id, callback) {
    });
 }
 //Ver qué mierda con este método, qué quiero
-RepositorioUsuarios.prototype.getVisitasDeUsuarioAUnLugar = function(usuario, lugar) {
+RepositorioUsuarios.prototype.getVisitasDeUsuarioAUnLugar = function(usuario, lugar, callback) {
 	if (esUnaInstancia(usuario, Usuario) && esUnaInstancia(lugar, Lugar)) {
-		
+		this.bd.getDatos(this.nombreObjetoPreferido, ['id', 'visitas'], function(datosVisitas) {
+			datosVisitas.forEach(function(datoU) {
+				if (datoU.id == usuario.id) {
+					datoU.visitas.forEach(function(datoV) {
+						if (datoV.lugar.place_id == lugar.place_id) {
+							callback(datoV.historial);
+						}
+					})
+				}
+			})
+		});
 	}
 }
 RepositorioUsuarios.prototype.guardarUsuario = function(usuario) {

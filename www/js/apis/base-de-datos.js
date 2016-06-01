@@ -62,7 +62,7 @@ function BaseDeDatos() {
                   "05/07/2016 01:04:47"
                ],
                lugar: {
-                  place_id: '',
+                  place_id: '347346',
                   nombre: NEGOCIOS.RECORCHOLIS,
                   ubicacion: {
                      latitud: -26.813362,
@@ -75,7 +75,7 @@ function BaseDeDatos() {
                   "05/20/2016 22:23:34"
                ],
                lugar: {
-                  place_id: '',
+                  place_id: '623526',
                   nombre: NEGOCIOS.LA_PIZZADA,
                   ubicacion: {
                      latitud: -26.830821,
@@ -106,7 +106,7 @@ function BaseDeDatos() {
                   "04/22/2016 20:21:24"
                ],
                lugar: {
-                  place_id: '',
+                  place_id: '567895',
                   nombre: NEGOCIOS.CARREFOUR,
                   ubicacion: {
                      latitud: -26.814933,
@@ -119,7 +119,7 @@ function BaseDeDatos() {
                   "05/19/2016 22:00:34",
                ],
                lugar: {
-                  place_id: '',
+                  place_id: '867456',
                   nombre: NEGOCIOS.ATLAS,
                   ubicacion: {
                      latitud: -26.828476,
@@ -149,7 +149,7 @@ function BaseDeDatos() {
                   "05/25/2016 13:43:51"
                ],
                lugar: {
-                  place_id: '',
+                  place_id: '287456',
                   nombre: NEGOCIOS.MIL99,
                   ubicacion: {
                      latitud: -26.816691,
@@ -161,7 +161,7 @@ function BaseDeDatos() {
                   "05/12/2016 22:00:25",
                ],
                lugar: {
-                  place_id: '',
+                  place_id: '734634',
                   nombre: NEGOCIOS.BURGER_KING,
                   ubicacion: {
                      latitud: -26.824049,
