@@ -12,15 +12,15 @@
    Por ahora lo dejo porque creo se está referenciando en varios lados.
 */
 var NEGOCIOS = {
-   BURGER_KING: 'Burger King',
-   LA_PIZZADA: 'La Pizzada',
-   MCDONALD: 'Mc Donalds',
+   BURGER_KING: 'BurgerKing',
+   LA_PIZZADA: 'LaPizzada',
+   MCDONALD: 'McDonalds',
    MIL99: 'Mil99',
-   EL_BALON: 'El Balón',
+   EL_BALON: 'ElBalón',
    CARREFOUR: 'Carrefour',
    VEA: 'Vea',
    ATLAS: 'Atlas',
-   EL_ATENEO: 'El Ateneo',
+   EL_ATENEO: 'ElAteneo',
    LANCASTER: 'Lancaster',
    RECORCHOLIS: 'Recorcholis'
 }
