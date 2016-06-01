@@ -64,7 +64,21 @@ function arrayCombinarElementosUnicos(array1, array2) {
 }
 
 function arrayBorrarElementosDuplicados(array) {
-   return Array.from(new Set(array));
+   var aux = [];
+   for (var i = 0; i < array.length; i++) {
+      var agregar = true;
+      for (var j = 0; j < aux.length; j++){
+         if (aux[j] === array[i]) {
+            agregar = false;
+            break;
+         }
+      }
+      if (agregar) {
+         aux.push(array[i]);
+      }
+   }
+   return aux;
+   //return Array.from(new Set(array));
 }
 
 function arrayGetUltimoElemento(array) {
