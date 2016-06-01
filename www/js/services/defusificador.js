@@ -5,6 +5,7 @@ Defusificador.prototype.defusificar = function(variables){
 	for(var i = 0; i < variables.length; i++){
 		if(resultado === undefined){
 			console.log('primera vez');
+			console.log(variables);
 			resultado = variables[i];
 		} else {
 			if(resultado.valor < variables[i].valor){

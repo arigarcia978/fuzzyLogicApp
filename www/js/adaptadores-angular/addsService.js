@@ -3,10 +3,6 @@ angular.module('starter')
 		var adaptadorPromociones = new AdaptadorPromociones();
 		var lugarElegido;
 	  	return {
-
-	    	getPromocionAMostrar: function(lugarElegido){
-	    		return adaptadorPromociones.getPromocion(lugarElegido);
-	    	},
 	    	setLugar: function(lugar){
 	    		lugarElegido = lugar;
 	    	},

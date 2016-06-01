@@ -1,9 +1,9 @@
 angular.module('starter').factory('googleMaps', [function(){
-	  var googleMapsService = new AdaptadorGoogleMaps();
+	  var repositorioLugares = new RepositorioLugares();
 	  var ubicacionActual;
 	  return {
-	    buscarLugaresCercanos: function(ubicacion) {
-	    	return googleMapsService.buscarTodosLosNegociosCercanos(ubicacion);
+	    buscarLugaresCercanos: function(ubicacion, callback) {
+	    	return repositorioLugares.getTodosLosLugaresCercanos(ubicacion, 'food', callback);
 	    },
 	    getLugarActual: function(ubicacion){
 	    	return ;

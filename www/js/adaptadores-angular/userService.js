@@ -15,14 +15,11 @@ angular.module('starter')
 	    		repositorioUsuarios.getTodosLosUsuarios(function(datos){ usuarios = datos; });
 	    		return usuarios;
 	    	},
-	    	getUsuario: function(id){
-	    		return repositorioUsuarios.getUsuarioPorId(id, function(datos){ return datos; });
+	    	getUsuario: function(id, callback){
+	    		return repositorioUsuarios.getUsuarioPorId(id, callback);
 	    	},
-	    	getMeGustasDeUsuario: function(id){
-	    		return repositorioUsuarios.getLugaresConMeGusta(id);
-	    	},
-	    	getVisitasALugar: function(id, lugar){
-	    		return repositorioUsuarios.visitasAUnLugar(id, lugar);
+	    	getVisitasALugar: function(id, lugar, callback){
+	    		return repositorioUsuarios.getVisitasDeUsuarioAUnLugar(id, lugar, callback);
 	    	}
 	  	}
 	}]);

@@ -17,8 +17,8 @@ function calcularProbabilidadesDeFrecuencia(lugares){
 	for(var i = 0; i < lugares.length; i++){
 		var lugar = lugares[i];
 		
-		var probPocoFrecuente = new Trapezoide(0,0,2,3).calculateIntersection(lugar.cantidadDeVisitasMensuales);
-		var probFrecuente = new Triangular(2,4,7).calculateIntersection(lugar.cantidadDeVisitasMensuales);
+		var probPocoFrecuente = new Trapezoide(0,0,1,3).calculateIntersection(lugar.cantidadDeVisitasMensuales);
+		var probFrecuente = new Triangular(2,4,8).calculateIntersection(lugar.cantidadDeVisitasMensuales);
 		var probMuyFrecuente = new Trapezoide(5,7,100,100).calculateIntersection(lugar.cantidadDeVisitasMensuales);
 
 		var nombreDeLugar = lugar.nombre;

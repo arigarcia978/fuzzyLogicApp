@@ -39,7 +39,6 @@ AdaptadorBaseDeDatos.prototype.crearUsuario = function(datosUsuario) {
       datosUsuario.sexo,
       datosUsuario.fechaN
    );
-   console.log(usuario);
    usuario.actualizarUbicacion(new Ubicacion(
       datosUsuario.ultimaUbicacionConocida.latitud,
       datosUsuario.ultimaUbicacionConocida.longitud,

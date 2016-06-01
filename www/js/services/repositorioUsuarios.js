@@ -194,13 +194,27 @@ RepositorioUsuarios.prototype.getTodosLosUsuarios = function(callback) {
 };
 RepositorioUsuarios.prototype.getUsuarioPorId = function(id, callback) {
    this.bd.getObjeto(this.nombreObjetoPreferido, id, function(usuario) {
-      callback(usuario);
+   		callback(usuario);
    });
 }
 //Ver qué mierda con este método, qué quiero
-RepositorioUsuarios.prototype.getVisitasDeUsuarioAUnLugar = function(usuario, lugar) {
+RepositorioUsuarios.prototype.getVisitasDeUsuarioAUnLugar = function(usuario, lugar, callback) {
 	if (esUnaInstancia(usuario, Usuario) && esUnaInstancia(lugar, Lugar)) {
-
+		this.bd.getDatos(this.nombreObjetoPreferido, ['id', 'visitas'], function(datosVisitas) {
+			var cantidad = 0;
+			datosVisitas.forEach(function(datoU) {
+				if (datoU.id == usuario.id) {
+					datoU.visitas.forEach(function(datoV) {
+						if (datoV.lugar.place_id == lugar.place_id) {
+							cantidad = datoV.historial.length;
+						}
+					})
+				}
+			});
+			callback(cantidad);
+		});
+	} else {
+		console.log('mandaste boludeces');
 	}
 }
 RepositorioUsuarios.prototype.guardarUsuario = function(usuario) {
