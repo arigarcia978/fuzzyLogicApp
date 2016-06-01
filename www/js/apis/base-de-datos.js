@@ -31,24 +31,25 @@ function BaseDeDatos() {
          MASCULINO: 'Masculino',
          FEMENINO: 'Femenino'
       }
-   }
+   };
    this.tablas = [
       {
          nombreTabla: bd.constantes.TABLAS.USUARIOS,
          //La ubicacion en las visitas ver qué onda....
          //El place id lo puse por si se quieren detalles
          
-         datos: [{
+         datos: [
+         {
             id: "1121",
-            nombre: "Leandro",
+            nombre: "Matias",
             sexo: bd.constantes.sexo.MASCULINO,
             fechaN: '11/04/1993',
             urlImagenDePerfil:"",
             ultimaUbicacionConocida: {
-               //Santiago y muñecas
+               //24 de Septiembre y maipu
                fecha: "05/31/2016 11:15:04",
-               latitud: -26.823910,
-               longitud: -65.204414
+               latitud: -26.830420,
+               longitud: -65.207850
             },
             visitas: [{
                historial: [
@@ -64,8 +65,8 @@ function BaseDeDatos() {
                   place_id: '',
                   nombre: NEGOCIOS.RECORCHOLIS,
                   ubicacion: {
-                     latitud: "23.56589209",
-                     longitud: "54.12198742"
+                     latitud: -26.813362,
+                     longitud: -65.291265
                   }
                }
             },{
@@ -77,8 +78,8 @@ function BaseDeDatos() {
                   place_id: '',
                   nombre: NEGOCIOS.LA_PIZZADA,
                   ubicacion: {
-                     latitud: "23.56589209",
-                     longitud: "54.12198742"
+                     latitud: -26.830821,
+                     longitud: -65.204742
                   }
                }
             }],
@@ -108,8 +109,8 @@ function BaseDeDatos() {
                   place_id: '',
                   nombre: NEGOCIOS.CARREFOUR,
                   ubicacion: {
-                     latitud: "23.56589209",
-                     longitud: "54.12198742"
+                     latitud: -26.814933,
+                     longitud: -65.209499
                   }
                }
             },{
@@ -121,8 +122,8 @@ function BaseDeDatos() {
                   place_id: '',
                   nombre: NEGOCIOS.ATLAS,
                   ubicacion: {
-                     latitud: "23.56589209",
-                     longitud: "54.12198742"
+                     latitud: -26.828476,
+                     longitud: -65.199654
                   }
                }
             }],
@@ -150,8 +151,8 @@ function BaseDeDatos() {
                   place_id: '',
                   nombre: NEGOCIOS.MIL99,
                   ubicacion: {
-                     latitud: "23.56589209",
-                     longitud: "54.12198742"
+                     latitud: -26.816691,
+                     longitud: -65.197985
                   }
                }
             },{
@@ -162,8 +163,8 @@ function BaseDeDatos() {
                   place_id: '',
                   nombre: NEGOCIOS.BURGER_KING,
                   ubicacion: {
-                     latitud: "23.56589209",
-                     longitud: "54.12198742"
+                     latitud: -26.824049,
+                     longitud: -65.202997
                   }
                }
             }],
@@ -299,7 +300,7 @@ function BaseDeDatos() {
          datos: []
       }
    ];
-};
+}
 
 BaseDeDatos.prototype.seleccionarColumnas = function(tabla, columnasASeleccionar) {
    var datos = tabla.map(function(fila) {
