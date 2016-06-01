@@ -11,7 +11,16 @@ ControladorDifuso.prototype.seleccionarPromociones = function(entradas){
 	console.log(salidas);
 	var defusificador = new Defusificador();
 	var lugarElegido = defusificador.defusificar(salidas);
+
+	var lugarFinal;
 	
-	console.log('Mostrar publicidad de: '+lugarElegido);
-	return lugarElegido;
+	//repositorioLugares.getLugarPorNombre(lugarElegido);
+	entradas.lugares.forEach(function(lugar){
+		var cochinada = sistemaClasificador.standarizarNombreVariable(lugar.nombre);
+		if(cochinada == lugarElegido){
+			lugarFinal = lugar;
+		}
+	})
+	
+	return lugarFinal;
 }

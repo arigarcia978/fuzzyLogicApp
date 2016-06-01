@@ -57,7 +57,7 @@ angular.module('starter')
 			var ubicacionAnterior;
 			*/
 
-			$scope.edad = motorMatematico.calcularEdad(user.fechaN);
+			$scope.edad = usuarioActual.getEdad();
 			
 			//actualizarUbicacion();
 			$scope.promocion = 'Titulo: vacio'
@@ -79,7 +79,10 @@ angular.module('starter')
 				if(seMovió) {
 					console.log('se movió');
 					lugarActual = googleMaps.getLugarActual(nuevaUbicacion);
-					lugaresCercanos = googleMaps.buscarLugaresCercanos(nuevaUbicacion);
+					googleMaps.buscarLugaresCercanos(nuevaUbicacion, function(lugares){
+						lugaresCercanos = lugares;
+					});
+					console.log(lugaresCercanos);
 					var entradas = prepararEntradas(nuevaUbicacion, ubicacionAnterior, lugaresCercanos);
 					var lugarElegido = fuzzyControllerService.getPromocionesAOfrecer(entradas);
 					servicioPromocion.setLugar(lugarElegido);
@@ -153,13 +156,12 @@ angular.module('starter')
 			function agregarVisitasMensualesALugares(lugaresCercanos) {
 				for (var i = 0; i < lugaresCercanos.length; i++) {
 					var lugar = lugaresCercanos[i];
-					lugar.setCantidadDeVisitasMensuales(calcularVisitasMensualesAlLugar(lugar.nombre));
+					lugar.setCantidadDeVisitasMensuales(calcularVisitasMensualesAlLugar(lugar));
 				}
 			}
 
 			function agregarMeGustaALugares(lugaresCercanos){
 				var meGustas = usuarioActual.getMeGustanEnFB();
-				console.log(meGustas);
 				for(var j = 0; j < meGustas.length; j++){
 					for (var i = 0; i < lugaresCercanos.length; i++) {
 						var lugar = lugaresCercanos[i];
@@ -171,7 +173,10 @@ angular.module('starter')
 			}
 
 			function calcularVisitasMensualesAlLugar(lugar){
-				return userService.getVisitasALugar(usuarioActual, lugar);
+				var visitas;
+				userService.getVisitasALugar(usuarioActual, lugar, function(datos){ 
+					visitas = datos;
+				});
 			}
 
 			function calcularDistanciaAlLugarCercano(ubicacion, ubicacionLugar){

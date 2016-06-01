@@ -42,6 +42,7 @@ function AdaptadorPromociones(){
 	];
 }
 AdaptadorPromociones.prototype.getPromocion = function(lugar){
+	console.log(lugar);
 	var nombreNormalizado = sistemaClasificador.standarizarNombreVariable(lugar.toString());
 	var promociones = this.promociones[lugar];
 	return promociones[0];

@@ -18,8 +18,8 @@ angular.module('starter')
 	    	getUsuario: function(id, callback){
 	    		return repositorioUsuarios.getUsuarioPorId(id, callback);
 	    	},
-	    	getVisitasALugar: function(id, lugar){
-	    		return repositorioUsuarios.visitasAUnLugar(id, lugar);
+	    	getVisitasALugar: function(id, lugar, callback){
+	    		return repositorioUsuarios.getVisitasDeUsuarioAUnLugar(id, lugar, callback);
 	    	}
 	  	}
 	}]);
