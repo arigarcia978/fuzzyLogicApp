@@ -1,0 +1,34 @@
+<div>
+  <ion-view view-title="Mi Perfil" cache-view="false">
+    <ion-content>
+      <div class="list card">
+        <center>
+        <img style="max-width: 40%; height: auto;" ng-src="img/{{user.id}}.png">
+        <div class="item item-divider item-positive">
+            Informacion Personal
+        </div>
+        <div class="item">
+          <h2>{{user.nombre}}</h2> <!--  usuario.nombre-->
+          <p>{{user.sexo}}</p><!-- usuario.sexo -->
+          <p>{{edad}}</p><!-- usuario.edad -->
+          <p>{{user.fechaN}}</p><!-- usuario.fecNac -->
+        </div>
+        <div class="list">
+          <div class="item item-divider item-positive">
+            Datos GPS
+          </div>
+          <div class="item" >
+            <h2>Ubicacion</h2>
+            <p>
+              Longitud: {{ubicacionNueva.getLongitud()}}
+              <br>
+              Latidud: {{ubicacionNueva.getLatitud()}}
+            </p><!-- Lat y Long -->
+          </div>
+        </div>
+      </div>
+      <center>
+      <a class="button button-balanced icon-right ion-pricetag" ng-href ='#/recomendado'>Ver Promocion</a>
+    </ion-content>
+  </ion-view>
+</div>

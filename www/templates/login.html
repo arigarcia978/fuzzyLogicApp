@@ -1,0 +1,19 @@
+<div>
+
+	<ion-view view-title="Iniciar Sesion">
+		<ion-content class="padding">
+	     	<div class="list">
+	      		<div class="item item-divider item-positive">
+				   Lista de Usuarios
+				</div>
+				<a class="item item-thumbnail-left" ng-href ='#/perfil/{{user.id}}' ng-repeat= "user in users">
+				<img ng-src="img/{{user.id}}.png"> <!-- img Usuario -->
+				<h2>{{user.nombre}}</h2> <!-- Usuario.Nombre -->
+				</a>
+			</div>
+	  	</ion-content>
+	</ion-view>
+</div>
+
+
+
