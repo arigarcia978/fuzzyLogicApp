@@ -129,7 +129,7 @@ function BaseDeDatos() {
             }
          }],
          lugaresConMeGusta: [
-            NEGOCIOS.RECORCHOLIS, NEGOCIOS.MCDONALD, NEGOCIOS.BURGER_KING
+            NEGOCIOS.RECORCHOLIS, NEGOCIOS.MCDONALD, NEGOCIOS.BURGER_KING, NEGOCIOS.LA_PIZZADA
          ]
       }]
    },{

@@ -72,11 +72,11 @@ angular.module('starter', ['ionic'])
     })
 
   .state('tab.account', {
-    url: '/account',
+    url: '/account/:lugar',
     views: {
       'tab-account': {
         templateUrl: 'templates/tab-account.html',
-        controller: 'ProfilesController'
+        controller: 'PromocionController'
       }
     }
   });

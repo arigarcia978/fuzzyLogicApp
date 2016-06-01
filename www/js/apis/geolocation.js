@@ -46,11 +46,13 @@ function geolocationApi() {
 
    //Coordenadas guardadas para simular que la api del gps nos devuelve ubicacion
    this.coordenadas = [
-      {lat: -26.826708, lon: -65.203769, ayudita: '25 de mayo casi llegando a la Córdoba'},
-      {lat: -26.824831, lon: -65.203330, ayudita: '25 de mayo entre Santiago y San Juan'},
-      {lat: -26.822596, lon: -65.204047, ayudita: 'Esquina Corrientes y Muñecas'},
-      {lat: -26.823787, lon: -65.218252, ayudita: 'Don Bosco entre 12 de octubre y Mitre'},
+    //  {lat: -26.826708, lon: -65.203769, ayudita: '25 de mayo casi llegando a la Córdoba'},
+      //{lat: -26.824831, lon: -65.203330, ayudita: '25 de mayo entre Santiago y San Juan'},
+      //{lat: -26.822596, lon: -65.204047, ayudita: 'Esquina Corrientes y Muñecas'},
+      //{lat: -26.823787, lon: -65.218252, ayudita: 'Don Bosco entre 12 de octubre y Mitre'},
       {lat: -26.822050, lon: -65.199478, ayudita: 'Esquina Marcos Paz y Rivadavia'},
+      {lat: -26.8308442, lon: -65.2051458, ayudita: '25 de mayo y 24 de septiembre'},
+     
    ];
 
 }
