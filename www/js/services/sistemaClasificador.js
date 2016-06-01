@@ -21,3 +21,22 @@ SistemaClasificador.prototype.clasificar = function(tipoAClasificar) {
 	}
 	this.fallas.push('El tipo: ' + tipoAClasificar + ' no pudo ser clasificado');
 }
+SistemaClasificador.prototype.removerEspacios = function(texto) {
+	return texto.replace(/ /g, "");
+}
+SistemaClasificador.prototype.standarizarNombreVariable = function(nombre) {
+	return this.removerEspacios(this.capitalizarPalabras(this.reemplazarCaracteresAcentuados(nombre)));
+}
+SistemaClasificador.prototype.reemplazarCaracteresAcentuados = function(texto) {
+	texto = texto.replace(/á/ig, "a");
+	texto = texto.replace(/é/ig, "e");
+	texto = texto.replace(/í/ig, "i");
+	texto = texto.replace(/ó/ig, "o");
+	return texto.replace(/ú/ig, "u");
+}
+SistemaClasificador.prototype.capitalizarPalabras = function(texto) {
+	return texto.replace(/\w\S*/g, function(palabra){
+		return palabra.charAt(0).toUpperCase() + palabra.substr(1);
+	});
+}
+var sistemaClasificador = new SistemaClasificador();
