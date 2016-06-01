@@ -21,16 +21,36 @@ function AdaptadorBaseDeDatos() {
    this.bd = new BaseDeDatos();
    this.CONSTANTES = {
       OBJETO: {
-         USUARIO: adaptador.bd.constantes.TABLAS.USUARIOS
+         USUARIO: adaptador.bd.constantes.TABLAS.USUARIOS,
+         PROMOCION: adaptador.bd.constantes.TABLAS.PROMOCIONES
       }
    }
 }
 AdaptadorBaseDeDatos.prototype.cargar = function(nombre, datos, esto) {
    if (nombre === esto.CONSTANTES.OBJETO.USUARIO) {
       return esto.crearUsuario(datos);
+   } else if (nombre === esto.CONSTANTES.OBJETO.PROMOCION) {
+      return esto.crearPromocion(datos);
    }
 };
 AdaptadorBaseDeDatos.prototype.crearUsuario = function(datosUsuario) {
+   var usuario = new Usuario(
+      datosUsuario.nombre,
+      datosUsuario.sexo,
+      datosUsuario.fechaN
+   );
+   console.log(usuario);
+   usuario.actualizarUbicacion(new Ubicacion(
+      datosUsuario.ultimaUbicacionConocida.latitud,
+      datosUsuario.ultimaUbicacionConocida.longitud,
+      new Date(datosUsuario.ultimaUbicacionConocida.fecha)));
+   usuario.agregarCosasQueLeGustanEnFB(datosUsuario.lugaresConMeGusta);
+   usuario.setId(datosUsuario.id);
+   return usuario;
+}
+AdaptadorBaseDeDatos.prototype.crearPromocion = function(datosPromocion) {
+   //console.log(datosPromocion);
+   /*
    var usuario = new Usuario(
       datosUsuario.nombre,
       datosUsuario.sexo,
@@ -43,12 +63,16 @@ AdaptadorBaseDeDatos.prototype.crearUsuario = function(datosUsuario) {
    usuario.agregarCosasQueLeGustanEnFB(datosUsuario.lugaresConMeGusta);
    usuario.setId(datosUsuario.id);
    return usuario;
+   */
 }
 AdaptadorBaseDeDatos.prototype.getDatos = function(nombreObjeto, datosRequeridos, callback) {
    this.bd.getTabla(nombreObjeto, function(datosObjeto) {
       callback(datosObjeto);
    }, datosRequeridos);
 }
+AdaptadorBaseDeDatos.prototype.getDatosQueCumplen = function(nombreObjeto, datosRequeridos, columna, valor, callback) {
+   //this.bd.
+};
 AdaptadorBaseDeDatos.prototype.getObjetos = function(nombreObjeto, callback) {
    var adaptador = this;
    this.getDatos(nombreObjeto, [], function(datosObjetos) {

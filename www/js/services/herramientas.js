@@ -89,6 +89,28 @@ function esUnArray(posibleArray) {
    return esUnaInstancia(posibleArray, Array);
 }
 
+//No usar esto a la ligera porque todo lo no primitivo es un objeto
+function esUnObjeto(posibleObjeto) {
+   return esUnaInstancia(posibleObjeto, Object);
+}
+
+function sonObjetosIguales(objeto1, objeto2, importaOrden) {
+   if(!existeLaVariable(importaOrden)) {
+      return (JSON.stringify(objeto1) === JSON.stringify(objeto2));
+   }
+}
+
+/* No lo estoy usando
+function convertirObjetoEnArray(objeto) {
+   var array = [];
+   for (var clave in objeto) {
+   eval("array.push({"+clave+": objeto[clave]})");
+   }
+   return array;
+}
+*/
+
+
 function esUnaFecha(posibleFecha) {
    return esUnaInstancia(posibleFecha, Date);
 }

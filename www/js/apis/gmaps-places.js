@@ -22,7 +22,7 @@
    perdí 2 horas en esto e.e Lo que sí, si buscas por ejemplo "food"
    te marca todo, sin importar sea restaurante, bar, comida rápida, etc.
    
-   Algunos que nos importan por ahora; food, movie_theater, home_goods_store, night_club, university
+   Algunos que nos importan por ahora; food, movie_theater, home_goods_store, night_club, library, university
 
    Nota: Las apis que ofrece Google de Places son 3:
       Places js api; places android api; places webservice api.
@@ -94,6 +94,28 @@
    la info del Places, sin importar que no usemos ningún mapa.
 */
 
+/*
+   Este objeto tiene que desaparecer. Los nombres acá son solo para 
+   reducir un poco los errores en cuanto a los nombres. Pero los que
+   enrealidad se usan en toda la aplicación son los que provienen de
+   Google Places api.
+
+   Por ahora lo dejo porque creo se está referenciando en varios lados.
+*/
+var NEGOCIOS = {
+   BURGER_KING: 'Burger King',
+   LA_PIZZADA: 'La Pizzada',
+   MCDONALD: 'Mc Donalds',
+   MIL99: 'Mil99',
+   EL_BALON: 'El Balón',
+   CARREFOUR: 'Carrefour',
+   VEA: 'Vea',
+   ATLAS: 'Atlas',
+   EL_ATENEO: 'El Ateneo',
+   LANCASTER: 'Lancaster',
+   RECORCHOLIS: 'Recórcholis'
+}
+
 var google = {
    maps: {
       LatLng: function(lat, lon) {
@@ -119,16 +141,17 @@ var google = {
 }
 
 google.maps.places.bdImprovisada = [
-   {place_id: '389274', nombre: 'Mc Donalds', tipoPagina:'Restaurante de Comida Rápida', tipo: 'food', lat: -26.825653, lng: -65.203591},
-   {place_id: '623526', nombre: 'La Pizzada', tipoPagina:'Pizzería' , tipo: 'food', lat: -26.830821, lng: -65.204742},
-   {place_id: '734634', nombre: 'Burger King', tipoPagina:'Comida Rápida' , tipo: 'food', lat: -26.824049, lng: -65.202997},
-   {place_id: '347346', nombre: 'Recorcholis', tipoPagina:'Discoteca' , tipo: 'night_club', lat: -26.813362, lng: -65.291265},
-   {place_id: '345786', nombre: 'El Balón', tipoPagina:'Bar restaurante' , tipo: 'food', lat: -26.821314, lng: -65.199179},
-   {place_id: '287456', nombre: 'Mil99', tipoPagina:'Bar restaurante' , tipo: 'food', lat: -26.816691, lng: -65.197985},
-   {place_id: '287964', nombre: 'Vea', tipPagina:'Supermercado' , tipo: 'home_goods_store', lat: -26.818280, lng: -65.205516},
-   {place_id: '419783', nombre: 'Lancaster', tipoPagina:'Club nocturno' , tipo: 'night_club', lat: -26.730901, lng: -65.262831},
-   {place_id: '567895', nombre: 'Carrefour', tipoPagina:'Supermercado' , tipo: 'home_goods_store', lat: -26.814933, lng: -65.209499},
-   {place_id: '867456', nombre: 'Atlas', tipoPagina:'Cine' , tipo: 'movie_theater', lat: -26.828476, lng: -65.199654}
+   {place_id: '389274', nombre: NEGOCIOS.MCDONALD, tipoPagina:'Restaurante de Comida Rápida', tipo: 'food', lat: -26.825653, lng: -65.203591},
+   {place_id: '623526', nombre: NEGOCIOS.LA_PIZZADA, tipoPagina:'Pizzería' , tipo: 'food', lat: -26.830821, lng: -65.204742},
+   {place_id: '734634', nombre: NEGOCIOS.BURGER_KING, tipoPagina:'Comida Rápida' , tipo: 'food', lat: -26.824049, lng: -65.202997},
+   {place_id: '347346', nombre: NEGOCIOS.RECORCHOLIS, tipoPagina:'Discoteca' , tipo: 'night_club', lat: -26.813362, lng: -65.291265},
+   {place_id: '345786', nombre: NEGOCIOS.EL_BALON, tipoPagina:'Bar restaurante' , tipo: 'food', lat: -26.821314, lng: -65.199179},
+   {place_id: '287456', nombre: NEGOCIOS.MIL99, tipoPagina:'Bar restaurante' , tipo: 'food', lat: -26.816691, lng: -65.197985},
+   {place_id: '287964', nombre: NEGOCIOS.VEA, tipPagina:'Supermercado' , tipo: 'home_goods_store', lat: -26.818280, lng: -65.205516},
+   {place_id: '419783', nombre: NEGOCIOS.LANCASTER, tipoPagina:'Club nocturno' , tipo: 'night_club', lat: -26.730901, lng: -65.262831},
+   {place_id: '567895', nombre: NEGOCIOS.CARREFOUR, tipoPagina:'Supermercado' , tipo: 'home_goods_store', lat: -26.814933, lng: -65.209499},
+   {place_id: '867456', nombre: NEGOCIOS.ATLAS, tipoPagina:'Cine' , tipo: 'movie_theater', lat: -26.828476, lng: -65.199654},
+   {place_id: '155358', nombre: NEGOCIOS.EL_ATENEO, tipoPagina:'Librería' , tipo: 'library', lat: -26.828630, lng: -65.204424}
 ];
 google.maps.places.PlacesService.prototype.nearbySearch = function(request, callback) {
    callback('datos de google en forma de Array', google.maps.places.PlacesServiceStatus.OK);

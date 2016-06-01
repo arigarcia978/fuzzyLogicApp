@@ -179,20 +179,21 @@ BaseDeDatosDeUsuarios.prototype.visitasAUnLugar = function(id, lugar){
 
 function RepositorioUsuarios() {
 	this.bd = new AdaptadorBaseDeDatos();
+	this.nombreObjetoPreferido = this.bd.CONSTANTES.OBJETO.USUARIO;
 	this.CONSTANTES = {
 		TIEMPO: {
 			MES: 'mes'
 		}
 	}
 }
-//Todo esto es en realidad el repositorio de Usuarios.
+//Recordar: Este método está por comodidad, pero no debería existir.
 RepositorioUsuarios.prototype.getTodosLosUsuarios = function(callback) {
-   this.bd.getObjetos(this.bd.CONSTANTES.OBJETO.USUARIO, function(usuarios) {
+   this.bd.getObjetos(this.nombreObjetoPreferido, function(usuarios) {
       callback(usuarios);
    });
 };
 RepositorioUsuarios.prototype.getUsuarioPorId = function(id, callback) {
-   this.bd.getObjeto(this.bd.CONSTANTES.OBJETO.USUARIO, id, function(usuario) {
+   this.bd.getObjeto(this.nombreObjetoPreferido, id, function(usuario) {
       callback(usuario);
    });
 }
