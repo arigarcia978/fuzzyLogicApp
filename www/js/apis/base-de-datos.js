@@ -57,9 +57,9 @@ function BaseDeDatos() {
       //La ubicacion en las visitas ver qué onda....
       //El place id lo puse por si se quieren detalles
       
-datos: [{
+      datos: [{
          id: "1121",
-         nombre: "Matias",
+         nombre: "Leandro",
          sexo: bd.constantes.sexo.MASCULINO,
          fechaN: '11/04/1993',
          urlImagenDePerfil:"",
@@ -71,9 +71,13 @@ datos: [{
          },
          visitas: [{
             historial: [
-               "04/29/2016 23:59:09",
-               "05/06/2016 22:43:51",
-               "05/13/2016 23:12:24"
+               "05/27/2016 21:37:09",
+               "05/21/2016 22:43:51",
+               "05/20/2016 23:12:24",
+               "05/15/2016 02:37:06",
+               "05/13/2016 22:44:31",
+               "05/07/2016 23:52:17",
+               "05/07/2016 01:04:47"
             ],
             lugar: {
                place_id: '',
