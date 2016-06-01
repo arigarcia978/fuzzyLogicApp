@@ -46,11 +46,9 @@ angular.module('starter')
 			var id = $stateParams.id;
 			$scope.user = userService.getUsuario(id);
 			var user= $scope.user;
-			$scope.edad = motorMatematico.calcularEdad(user.fechaN);
-			console.log($scope.user);
-
+			console.log(user)
+			$scope.edad = motorMatematico.calcularEdad(user.fechaDeNacimiento);
 			actualizarUbicacion();
-			$scope.promocion = 'Titulo: vacio'
 
 			//$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
 			function actualizarUbicacion(){

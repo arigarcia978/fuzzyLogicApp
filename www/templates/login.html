@@ -4,14 +4,15 @@
 	      <ion-nav-back-button>
 	      </ion-nav-back-button>
 	    </ion-nav-bar>
-		<ion-content class="padding">
-	     	<div class="list">
+		<ion-content >
+		
+	     	<div class="list padding">
 	      		<div class="item item-divider item-positive">
-				   Lista de Usuarios
+				  <center> Lista de Usuarios
 				</div>
-				<a class="item item-thumbnail-left" ng-href ='#/perfil/{{user.id}}' ng-repeat= "user in users">
-				<img ng-src="img/{{user.id}}.png"> <!-- img Usuario -->
-				<h2>{{user.nombre}}</h2> <!-- Usuario.Nombre -->
+				<a class="item item-thumbnail-left " style="background-color:rgba(255,255,255,0.65) !important; padding-top: 10%;" ng-href ='#/perfil/{{user.id}}' ng-repeat= "user in users"> <!-- Sacar style a css -->
+				<img ng-src="img/{{user.id}}.png"> 
+				<p class="buttonFooter">{{user.nombre}}</p> 
 				</a>
 			</div>
 	  	</ion-content>

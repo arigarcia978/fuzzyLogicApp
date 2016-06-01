@@ -4025,6 +4025,14 @@ a.subdued {
     font-weight: 400;
     font-size: 13px;
     line-height: 32px; }
+    .buttonFooter{
+      font-size: 25px !important;
+    }
+    .fondoApp{
+      background: url('../../../img/fondoApp.png') no-repeat center;
+      max-width: 100%;
+      height: auto;
+    }
     .bar .button.button-icon:before,
     .bar .button .icon:before, .bar .button.icon:before, .bar .button.icon-left:before, .bar .button.icon-right:before, .bar button.button-icon:before,
     .bar button .icon:before, .bar button.icon:before, .bar button.icon-left:before, .bar button.icon-right:before {
