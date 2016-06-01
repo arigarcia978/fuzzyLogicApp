@@ -135,6 +135,7 @@ function formatearFecha(fecha, tipo) {
       1: 'M/d/yyyy   hh:mm:ss'
       2: 'M/d/yyyy   h:m:s'
       3: 'dd/MM/yyyy hh:mm:ss'
+      4: 'dd/MM/yyyy'
    */
 
    function agregarSufijoCero(n) {
@@ -176,6 +177,11 @@ function formatearFecha(fecha, tipo) {
             agregarSufijoCero(hora),
             agregarSufijoCero(minutos),
             agregarSufijoCero(segundos));
+      case 4:
+         return armaFecha(
+            agregarSufijoCero(dia), 
+            agregarSufijoCero(mes), 
+            anio);
       default:
          return armarCompleto(
             agregarSufijoCero(mes), 

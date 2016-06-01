@@ -11,7 +11,6 @@ angular.module('starter')
 		'addsService',
 		function(servicioGPS, servicioGooglePlaces, googleMaps, $rootScope, fuzzyControllerService, userService, $stateParams, $scope, servicioPromocion){
 			
-			console.log('LEANDRO ES UN CURIOSO');
 
 			var ubicacionActual, lugaresCercanos, usuarioActual;
 			
@@ -59,6 +58,8 @@ angular.module('starter')
 
 
 			$scope.edad = usuarioActual.getEdad();
+			global = usuarioActual.fechaDeNacimiento;
+			$scope.fechaDeNacimiento = formatearFecha(usuarioActual.fechaDeNacimiento, 4)
 			
 			//actualizarUbicacion()
 			//$rootScope.$on('actualizarUbicacion', function(){//o ubicacion
